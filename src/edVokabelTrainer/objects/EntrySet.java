@@ -1,4 +1,4 @@
-package edVokabelTrainer;
+package edVokabelTrainer.objects;
 
 import java.io.Serializable;
 
@@ -27,5 +27,9 @@ public class EntrySet implements Serializable {
 
     public String getGermanWord() {
         return germanWord;
+    }
+
+    public int getCorrectTranslated() {
+        return correctTranslated;
     }
 }
