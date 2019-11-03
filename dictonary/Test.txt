@@ -1,3 +1,5 @@
 I; Ich
 you; du
 something; etwas
+me; mich
+self; selbst

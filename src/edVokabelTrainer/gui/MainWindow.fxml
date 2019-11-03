@@ -12,21 +12,25 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" prefHeight="300.0" prefWidth="500.0" style="-fx-background-color: rgb(86, 148, 77);" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edVokabelTrainer.gui.Controller">
+<BorderPane fx:id="borderPane" prefHeight="300.0" prefWidth="600.0" style="-fx-background-color: rgb(86, 148, 77);" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edVokabelTrainer.gui.Controller">
    <center>
       <VBox spacing="15.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox spacing="10.0">
+            <Label fx:id="info_label" textFill="WHITE" />
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
                <children>
                   <Label fx:id="label_vok" textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font></Label>
                   <HBox HBox.hgrow="ALWAYS" />
-                  <TextField fx:id="textfield" />
+                  <TextField fx:id="textfield" stylesheets="@css/textfield.css">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></TextField>
                </children>
             </HBox>
-            <Button fx:id="btn_ok" mnemonicParsing="false" onAction="#check_vok" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 5;" text="Okay" textFill="WHITE">
+            <Button fx:id="btn_ok" mnemonicParsing="false" onAction="#check_vok" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 5;" text="Prüfen" textFill="WHITE">
                <font>
                   <Font size="24.0" />
                </font>
@@ -52,8 +56,9 @@
               <menus>
                 <Menu mnemonicParsing="false" text="File">
                   <items>
-                    <MenuItem mnemonicParsing="false" onAction="#importDic" text="import dictonary" />
-                        <MenuItem mnemonicParsing="false" onAction="#startTraining" text="start training" />
+                    <MenuItem mnemonicParsing="false" onAction="#importDic" text="Wörterbuch importieren" />
+                        <MenuItem mnemonicParsing="false" onAction="#startTraining" text="Übung starten" />
+                        <MenuItem mnemonicParsing="false" onAction="#startRepetition" text="Wiederhohlung starten" />
                         <MenuItem mnemonicParsing="false" onAction="#close" text="Close" />
                   </items>
                 </Menu>
@@ -68,7 +73,7 @@
                <children>
                   <Label text="ED Vokabel Trainer" textFill="WHITE">
                      <font>
-                        <Font name="Corbel Bold" size="35.0" />
+                        <Font name="Corbel Bold" size="30.0" />
                      </font>
                   </Label>
                </children>
@@ -86,7 +91,7 @@
       <VBox prefWidth="20.0" BorderPane.alignment="CENTER" />
    </left>
    <right>
-      <VBox prefWidth="100.0" BorderPane.alignment="CENTER" />
+      <VBox prefWidth="20.0" BorderPane.alignment="CENTER" />
    </right>
    <bottom>
       <VBox prefHeight="20.0" BorderPane.alignment="CENTER" />

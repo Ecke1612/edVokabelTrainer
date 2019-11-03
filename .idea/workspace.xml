@@ -1,23 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/edVokabelTrainer/objects/StoreObject.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/edVokabelTrainer/objects/Tools.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/EDFileHandler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/EDFileHandler.xml" afterDir="false" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Basics">
+      <change afterPath="$PROJECT_DIR$/src/edVokabelTrainer/gui/css/textfield.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/EDVokabelTrainer/edVokabelTrainer/Controller.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/EDVokabelTrainer/edVokabelTrainer/DataHandling.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/EDVokabelTrainer/edVokabelTrainer/Dictonary.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/EDVokabelTrainer/edVokabelTrainer/EntrySet.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/EDVokabelTrainer/edVokabelTrainer/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/EDVokabelTrainer/edVokabelTrainer/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/EDVokabelTrainer/edVokabelTrainer/MainWindow.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edVokabelTrainer/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edVokabelTrainer/gui/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edVokabelTrainer/DataHandling.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edVokabelTrainer/handling/DataHandling.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edVokabelTrainer/Dictonary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edVokabelTrainer/objects/Dictonary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edVokabelTrainer/EntrySet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edVokabelTrainer/objects/EntrySet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edVokabelTrainer/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edVokabelTrainer/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edVokabelTrainer/MainWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/edVokabelTrainer/gui/MainWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dictonary/Test.txt" beforeDir="false" afterPath="$PROJECT_DIR$/dictonary/Test.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edVokabelTrainer/gui/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edVokabelTrainer/gui/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edVokabelTrainer/gui/MainWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/edVokabelTrainer/gui/MainWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edVokabelTrainer/handling/DataHandling.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edVokabelTrainer/handling/DataHandling.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edVokabelTrainer/objects/Dictonary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edVokabelTrainer/objects/Dictonary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edVokabelTrainer/objects/EntrySet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edVokabelTrainer/objects/EntrySet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edVokabelTrainer/objects/Tools.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edVokabelTrainer/objects/Tools.java" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -80,12 +73,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/edVokabelTrainer/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="350">
+            <state relative-caret-position="238">
               <caret line="21" column="5" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#934#935#0" expanded="true" />
-                <element signature="e#962#963#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -94,8 +85,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/edVokabelTrainer/handling/DataHandling.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="57" column="51" selection-start-line="57" selection-start-column="51" selection-end-line="57" selection-end-column="51" />
+            <state relative-caret-position="469">
+              <caret line="63" column="25" selection-start-line="63" selection-start-column="25" selection-end-line="63" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -106,13 +97,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/edVokabelTrainer/objects/StoreObject.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
+            <state relative-caret-position="170">
               <caret line="13" column="50" selection-start-line="13" selection-start-column="50" selection-end-line="13" selection-end-column="50" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#253#254#0" expanded="true" />
-                <element signature="e#299#300#0" expanded="true" />
-                <element signature="e#385#386#0" expanded="true" />
+                <element signature="e#381#382#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -121,8 +110,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/edVokabelTrainer/objects/Tools.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" column="20" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
+            <state relative-caret-position="102">
+              <caret line="7" column="50" selection-start-line="7" selection-start-column="50" selection-end-line="7" selection-end-column="50" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -130,21 +119,26 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/EDVokabelTrainer.iml">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/edVokabelTrainer/gui/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="37" column="32" selection-start-line="37" selection-start-column="32" selection-end-line="37" selection-end-column="32" />
+            <state relative-caret-position="309">
+              <caret line="126" column="106" selection-start-line="126" selection-start-column="106" selection-end-line="126" selection-end-column="106" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#440#441#0" expanded="true" />
-                <element signature="e#485#486#0" expanded="true" />
+                <element signature="e#1262#1263#0" expanded="true" />
+                <element signature="e#1307#1308#0" expanded="true" />
+                <element signature="method#pickEntrySet1#0;class#Controller#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/edVokabelTrainer/gui/css/textfield.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="5" column="1" lean-forward="true" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -158,13 +152,11 @@
         <entry file="file://$PROJECT_DIR$/src/edVokabelTrainer/objects/Dictonary.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="272">
-              <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+              <caret line="19" column="23" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#256#257#0" expanded="true" />
-                <element signature="e#288#289#0" expanded="true" />
-                <element signature="e#529#530#0" expanded="true" />
-                <element signature="e#556#557#0" expanded="true" />
+                <element signature="e#884#885#0" expanded="true" />
+                <element signature="e#917#918#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -173,10 +165,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/edVokabelTrainer/objects/EntrySet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="31" column="39" selection-start-line="31" selection-start-column="39" selection-end-line="31" selection-end-column="39" />
+            <state relative-caret-position="255">
+              <caret line="15" column="41" selection-start-line="15" selection-start-column="41" selection-end-line="15" selection-end-column="41" />
               <folding>
-                <element signature="e#747#748#0" expanded="true" />
+                <element signature="e#406#407#0" expanded="true" />
+                <element signature="e#441#442#0" expanded="true" />
+                <element signature="e#612#613#0" expanded="true" />
+                <element signature="e#646#647#0" expanded="true" />
+                <element signature="e#683#684#0" expanded="true" />
+                <element signature="e#716#717#0" expanded="true" />
+                <element signature="e#757#758#0" expanded="true" />
+                <element signature="e#797#798#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -184,12 +183,12 @@
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/edVokabelTrainer/gui/MainWindow.fxml">
+          <provider editor-type-id="JavaFX-Scene-Builder" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" selection-start-line="14" selection-end-line="14" />
+            <state relative-caret-position="527">
+              <caret line="32" column="183" selection-start-line="32" selection-start-column="183" selection-end-line="32" selection-end-column="183" />
             </state>
           </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder" />
         </entry>
       </file>
     </leaf>
@@ -198,6 +197,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -221,14 +221,16 @@
         <option value="$PROJECT_DIR$/src/edVokabelTrainer/Dictonary.java" />
         <option value="$PROJECT_DIR$/src/edVokabelTrainer/DataHandling.java" />
         <option value="$PROJECT_DIR$/src/edVokabelTrainer/EntrySet.java" />
+        <option value="$PROJECT_DIR$/src/edVokabelTrainer/handling/Save.java" />
+        <option value="$PROJECT_DIR$/src/edVokabelTrainer/objects/StoreObject.java" />
+        <option value="$PROJECT_DIR$/src/edVokabelTrainer/Main.java" />
         <option value="$PROJECT_DIR$/src/edVokabelTrainer/objects/Dictonary.java" />
         <option value="$PROJECT_DIR$/src/edVokabelTrainer/objects/Tools.java" />
         <option value="$PROJECT_DIR$/src/edVokabelTrainer/objects/EntrySet.java" />
-        <option value="$PROJECT_DIR$/src/edVokabelTrainer/handling/Save.java" />
-        <option value="$PROJECT_DIR$/src/edVokabelTrainer/objects/StoreObject.java" />
+        <option value="$PROJECT_DIR$/src/edVokabelTrainer/gui/MainWindow.fxml" />
         <option value="$PROJECT_DIR$/src/edVokabelTrainer/handling/DataHandling.java" />
-        <option value="$PROJECT_DIR$/src/edVokabelTrainer/Main.java" />
         <option value="$PROJECT_DIR$/src/edVokabelTrainer/gui/Controller.java" />
+        <option value="$PROJECT_DIR$/src/edVokabelTrainer/gui/css/textfield.css" />
       </list>
     </option>
   </component>
@@ -255,7 +257,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -321,6 +322,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -334,9 +336,10 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1572554733925" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1572808959066" />
     <property name="dynamic.classpath" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../_ExternalLib/own/EDFileHandler.jar!/" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -444,18 +447,33 @@
       <workItem from="1572415225817" duration="839000" />
       <workItem from="1572444717947" duration="1378000" />
       <workItem from="1572531604308" duration="207000" />
-      <workItem from="1572550368672" duration="4173000" />
+      <workItem from="1572550368672" duration="4465000" />
+      <workItem from="1572559509715" duration="1636000" />
+      <workItem from="1572598127933" duration="8062000" />
+      <workItem from="1572679025619" duration="969000" />
+      <workItem from="1572682698998" duration="254000" />
+      <workItem from="1572730166495" duration="1062000" />
+      <workItem from="1572779914389" duration="1503000" />
+      <workItem from="1572806090879" duration="1950000" />
     </task>
+    <task id="LOCAL-00001" summary="Basics">
+      <created>1572554795706</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1572554795706</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7692000" />
+    <option name="totallyTimeSpent" value="23420000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.2153518" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.23081024" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" />
       <window_info id="Designer" order="3" />
@@ -463,9 +481,9 @@
       <window_info id="Capture Tool" order="5" />
       <window_info id="UI Designer" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.329718" />
       <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3286334" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3991323" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -501,6 +519,8 @@
   <component name="VcsManagerConfiguration">
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
+    <MESSAGE value="Basics" />
+    <option name="LAST_COMMIT_MESSAGE" value="Basics" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -508,33 +528,37 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/edVokabelTrainer/SatsObject.java" />
-    <entry file="file://$PROJECT_DIR$/src/edVokabelTrainer/gui/MainWindow.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edVokabelTrainer/handling/Save.java" />
     <entry file="file://$PROJECT_DIR$/EDVokabelTrainer.iml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/edVokabelTrainer/objects/Tools.java">
+    <entry file="file://$PROJECT_DIR$/src/edVokabelTrainer/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="20" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
+        <state relative-caret-position="238">
+          <caret line="21" column="5" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/edVokabelTrainer/objects/EntrySet.java">
+    <entry file="file://$PROJECT_DIR$/src/edVokabelTrainer/objects/StoreObject.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="31" column="39" selection-start-line="31" selection-start-column="39" selection-end-line="31" selection-end-column="39" />
+        <state relative-caret-position="170">
+          <caret line="13" column="50" selection-start-line="13" selection-start-column="50" selection-end-line="13" selection-end-column="50" />
           <folding>
-            <element signature="e#747#748#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#381#382#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edVokabelTrainer/objects/Tools.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="7" column="50" selection-start-line="7" selection-start-column="50" selection-end-line="7" selection-end-column="50" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -542,70 +566,69 @@
     <entry file="file://$PROJECT_DIR$/dictonary/Test.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/edVokabelTrainer/handling/Save.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/edVokabelTrainer/objects/Dictonary.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
-          <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+          <caret line="19" column="23" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#256#257#0" expanded="true" />
-            <element signature="e#288#289#0" expanded="true" />
-            <element signature="e#529#530#0" expanded="true" />
-            <element signature="e#556#557#0" expanded="true" />
+            <element signature="e#884#885#0" expanded="true" />
+            <element signature="e#917#918#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/edVokabelTrainer/objects/StoreObject.java">
+    <entry file="file://$PROJECT_DIR$/src/edVokabelTrainer/objects/EntrySet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="50" selection-start-line="13" selection-start-column="50" selection-end-line="13" selection-end-column="50" />
+        <state relative-caret-position="255">
+          <caret line="15" column="41" selection-start-line="15" selection-start-column="41" selection-end-line="15" selection-end-column="41" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#253#254#0" expanded="true" />
-            <element signature="e#299#300#0" expanded="true" />
-            <element signature="e#385#386#0" expanded="true" />
+            <element signature="e#406#407#0" expanded="true" />
+            <element signature="e#441#442#0" expanded="true" />
+            <element signature="e#612#613#0" expanded="true" />
+            <element signature="e#646#647#0" expanded="true" />
+            <element signature="e#683#684#0" expanded="true" />
+            <element signature="e#716#717#0" expanded="true" />
+            <element signature="e#757#758#0" expanded="true" />
+            <element signature="e#797#798#0" expanded="true" />
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edVokabelTrainer/gui/MainWindow.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="32" column="183" selection-start-line="32" selection-start-column="183" selection-end-line="32" selection-end-column="183" />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/edVokabelTrainer/handling/DataHandling.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="57" column="51" selection-start-line="57" selection-start-column="51" selection-end-line="57" selection-end-column="51" />
+        <state relative-caret-position="469">
+          <caret line="63" column="25" selection-start-line="63" selection-start-column="25" selection-end-line="63" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/edVokabelTrainer/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/edVokabelTrainer/gui/css/textfield.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="21" column="5" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#934#935#0" expanded="true" />
-            <element signature="e#962#963#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="85">
+          <caret line="5" column="1" lean-forward="true" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/edVokabelTrainer/gui/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="37" column="32" selection-start-line="37" selection-start-column="32" selection-end-line="37" selection-end-column="32" />
+        <state relative-caret-position="309">
+          <caret line="126" column="106" selection-start-line="126" selection-start-column="106" selection-end-line="126" selection-end-column="106" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#440#441#0" expanded="true" />
-            <element signature="e#485#486#0" expanded="true" />
+            <element signature="e#1262#1263#0" expanded="true" />
+            <element signature="e#1307#1308#0" expanded="true" />
+            <element signature="method#pickEntrySet1#0;class#Controller#0" />
           </folding>
         </state>
       </provider>

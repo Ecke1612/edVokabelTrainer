@@ -53,10 +53,16 @@ public class DataHandling {
         System.out.println("saved");
     }
 
-    public void load() {
-        StoreObject storeObject = (StoreObject) objectSerializer.loadObjects("saves/save.dat");
-        dictonaries = storeObject.getDictonaries();
-        System.out.println("loaded");
+    public boolean load() {
+        if(plainHandler.fileExist("saves/save.dat")) {
+            StoreObject storeObject = (StoreObject) objectSerializer.loadObjects("saves/save.dat");
+            dictonaries = storeObject.getDictonaries();
+            System.out.println("loaded");
+            return true;
+        } else {
+            System.out.println("no saves found.");
+            return false;
+        }
     }
 
 }

@@ -18,7 +18,9 @@ public class EntrySet implements Serializable {
     }
 
     public void countCorrectTranslatedDown() {
-        correctTranslated--;
+        if(correctTranslated > 0) {
+            correctTranslated--;
+        }
     }
 
     public String getForeignWord() {
