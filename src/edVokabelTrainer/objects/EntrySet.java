@@ -13,6 +13,12 @@ public class EntrySet implements Serializable {
         this.germanWord = germanWord;
     }
 
+    public EntrySet(String foreignWord, String germanWord, int correctTranslated) {
+        this.foreignWord = foreignWord;
+        this.germanWord = germanWord;
+        this.correctTranslated = correctTranslated;
+    }
+
     public void countCorrectTranslatedUp() {
         correctTranslated++;
     }

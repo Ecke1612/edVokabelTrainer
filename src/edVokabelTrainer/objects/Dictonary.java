@@ -17,6 +17,11 @@ public class Dictonary implements Serializable {
         entrySets.add(new EntrySet(foreignword, germanWord));
     }
 
+    public void addEntry(String foreignword, String germanWord, int correctTranslated, int learndIndex) {
+        if(correctTranslated >= learndIndex) learndSets.add(new EntrySet(foreignword, germanWord, correctTranslated));
+        else entrySets.add(new EntrySet(foreignword, germanWord, correctTranslated));
+    }
+
     public void moveToLearnd(EntrySet entrySet) {
         entrySets.remove(entrySet);
         learndSets.add(entrySet);
@@ -25,6 +30,17 @@ public class Dictonary implements Serializable {
     public void moveToEntrySet(EntrySet entrySet) {
         learndSets.remove(entrySet);
         entrySets.add(entrySet);
+    }
+
+    public ArrayList<String> getListInSaveForm() {
+        ArrayList<String> content = new ArrayList<>();
+        for(EntrySet e: entrySets) {
+            content.add(e.getForeignWord() + "; " + e.getGermanWord() + ";" + e.getCorrectTranslated());
+        }
+        for(EntrySet e: learndSets) {
+            content.add(e.getForeignWord() + "; " + e.getGermanWord() + ";" + e.getCorrectTranslated());
+        }
+        return content;
     }
 
     public ArrayList<EntrySet> getEntrySets() {

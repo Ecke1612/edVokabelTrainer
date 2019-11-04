@@ -49,6 +49,10 @@ public class Controller {
         datahandler.importDictonary();
     }
 
+    public void updateDictonary() {
+
+    }
+
     public void startTraining() {
         System.out.println("start training");
         //Collections.shuffle(datahandler.getActiveDictionary().getEntrySets());
