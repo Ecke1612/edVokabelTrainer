@@ -3,8 +3,6 @@ package edVokabelTrainer.handling;
 import com.ed.filehandler.ObjectSerializer;
 import com.ed.filehandler.PlainHandler;
 import edVokabelTrainer.objects.Dictonary;
-import edVokabelTrainer.objects.EntrySet;
-import edVokabelTrainer.objects.StoreObject;
 import edVokabelTrainer.objects.StoreSettingsObject;
 import javafx.stage.FileChooser;
 
@@ -23,10 +21,6 @@ public class DataHandling {
 
     }
 
-    public void loadDictonary() {
-
-    }
-
     public void importDictonary() {
         FileChooser fileChooser = new FileChooser();
         File dicFile = fileChooser.showOpenDialog(null);
@@ -36,7 +30,7 @@ public class DataHandling {
         }
     }
 
-    private void loadDictionary(File dicFile) {
+    public void loadDictionary(File dicFile) {
         ArrayList<String> stringlist = plainHandler.fileLoader(dicFile.getPath());
         Dictonary dictonary = new Dictonary(dicFile.getName());
         dictonaries.add(dictonary);
@@ -51,42 +45,26 @@ public class DataHandling {
                 System.out.println(Arrays.toString(str));
             }
         }
+        System.out.println(dicFile.getName() + " wurde mit " + dictonary.getEntrySets().size() + " geladen");
     }
 
-
-
-    public void updateDictonary1() {
-        FileChooser fileChooser = new FileChooser();
-        File dicFile = fileChooser.showOpenDialog(null);
-        if(dicFile != null) {
-            System.out.println("Wörterbuch update wird ausgeführt");
-            ArrayList<String> stringlist = plainHandler.fileLoader(dicFile.getPath());
-            for (String s : stringlist) {
-                String[] str = s.split(";");
-                if (str.length != 2) {
-                    System.out.println("Import Parsing Error - WRONG ARRAY LENGTH: " + str.length);
-                    System.out.println(Arrays.toString(str));
-                }
-                boolean entryAlreadyInList = false;
-                for(EntrySet e : getActiveDictionary().getEntrySets()) {
-                    if(e.getForeignWord().equals(str[0]) && e.getGermanWord().equals(str[1])) {
-                        entryAlreadyInList = true;
-                    }
-                }
-                if(!entryAlreadyInList) {
-                    getActiveDictionary().addEntry(str[0], str[1]);
-                    System.out.println(str[0] + "; " + str[1] + " - hinzugefügt");
-                }
-            }
-
-        }
-    }
 
     public Dictonary getActiveDictionary() {
         if(dictonaries.size() > 0) {
-            return dictonaries.get(0);
+            if(storeSettingsObject.getActiveDic() >= dictonaries.size()) {
+                System.out.println("reset aciteve Dic to 0");
+                storeSettingsObject.setActiveDic(0);
+            }
+            System.out.println("return activ dic: " + storeSettingsObject.getActiveDic());
+            System.out.println("dic Size: " + dictonaries.get(storeSettingsObject.getActiveDic()).getEntrySets().size());
+            return dictonaries.get(storeSettingsObject.getActiveDic());
         }
         else return null;
+    }
+
+    public boolean dicLoaded() {
+        if(getActiveDictionary() == null) return false;
+        else return true;
     }
 
     public void save() {
@@ -102,14 +80,10 @@ public class DataHandling {
         System.out.println("saved");
     }
 
-    public boolean load() {
+    public boolean loadFromFile() {
         if(plainHandler.fileExist("saves/save.dat")) {
             storeSettingsObject = (StoreSettingsObject) objectSerializer.loadObjects("saves/save.dat");
-            for(String pathe : storeSettingsObject.getDictonaryStorePathes()) {
-                File file = new File(pathe);
-                loadDictionary(file);
-                System.out.println("loaded " + file.getName());
-            }
+            reload();
             return true;
         } else {
             System.out.println("no saves found.");
@@ -117,4 +91,20 @@ public class DataHandling {
         }
     }
 
+    public void reload() {
+        dictonaries.clear();
+        for (String path : storeSettingsObject.getDictonaryStorePathes()) {
+            File file = new File(path);
+            loadDictionary(file);
+            System.out.println("loaded " + file.getName());
+        }
+    }
+
+    public ArrayList<Dictonary> getDictonaries() {
+        return dictonaries;
+    }
+
+    public StoreSettingsObject getStoreSettingsObject() {
+        return storeSettingsObject;
+    }
 }

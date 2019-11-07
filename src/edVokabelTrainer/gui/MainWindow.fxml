@@ -12,69 +12,98 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" prefHeight="300.0" prefWidth="600.0" style="-fx-background-color: rgb(86, 148, 77);" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edVokabelTrainer.gui.Controller">
+<BorderPane fx:id="borderPane" prefHeight="250.0" prefWidth="600.0" style="-fx-background-color: rgb(86, 148, 77);" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edVokabelTrainer.gui.Controller">
    <center>
       <VBox spacing="15.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="info_label" textFill="WHITE" />
+            <HBox alignment="CENTER_LEFT" fillHeight="false" spacing="10.0">
+               <children>
+                  <Button fx:id="btn_toggleTraining" mnemonicParsing="false" onAction="#startTraining" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 5;" text="" textFill="WHITE" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="Segoe MDL2 Assets" size="18.0" />
+                     </font>
+                  </Button>
+                  <HBox alignment="CENTER_LEFT" fillHeight="false" spacing="10.0" style="-fx-border-color: white; -fx-border-radius: 5;" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label fx:id="label_vok" textFill="WHITE" HBox.hgrow="ALWAYS">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                           <padding>
+                              <Insets left="5.0" right="5.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
             <HBox alignment="CENTER_LEFT" spacing="10.0">
                <children>
-                  <Label fx:id="label_vok" textFill="WHITE">
-                     <font>
-                        <Font size="24.0" />
-                     </font></Label>
-                  <HBox HBox.hgrow="ALWAYS" />
-                  <TextField fx:id="textfield" stylesheets="@css/textfield.css">
+                  <TextField fx:id="textfield" prefHeight="32.0" prefWidth="303.0" stylesheets="@css/textfield.css">
                      <font>
                         <Font name="System Bold" size="14.0" />
-                     </font></TextField>
+                     </font>
+                  </TextField>
+                  <Label fx:id="label_feedback" textFill="#93ff82">
+                     <font>
+                        <Font name="Segoe MDL2 Assets" size="24.0" />
+                     </font>
+                  </Label>
                </children>
             </HBox>
-            <Button fx:id="btn_ok" mnemonicParsing="false" onAction="#check_vok" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 5;" text="Prüfen" textFill="WHITE">
-               <font>
-                  <Font size="24.0" />
-               </font>
-               <padding>
-                  <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
-               </padding>
-            </Button>
-            <HBox spacing="10.0">
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
                <children>
-                  <Label fx:id="label_out" textFill="WHITE">
+                  <Button fx:id="btn_ok" mnemonicParsing="false" onAction="#check_vok" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 5;" text="Prüfen" textFill="WHITE">
                      <font>
                         <Font size="24.0" />
-                     </font></Label>
+                     </font>
+                     <padding>
+                        <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
+                     </padding>
+                  </Button>
+                  <Label fx:id="label_out" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
                </children>
             </HBox>
          </children>
       </VBox>
    </center>
    <top>
-      <VBox spacing="5.0" BorderPane.alignment="CENTER">
+      <VBox spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <MenuBar style="-fx-background-color: rgb(86, 148, 77);">
+            <MenuBar style="-fx-background-color: rgb(66, 128, 57);" stylesheets="@css/menubar.css">
               <menus>
-                <Menu mnemonicParsing="false" text="File">
+                <Menu mnemonicParsing="false" text="Datei">
                   <items>
                     <MenuItem mnemonicParsing="false" onAction="#importDic" text="Wörterbuch importieren" />
-                        <MenuItem mnemonicParsing="false" onAction="#updateDictonary" text="Wörterbuch aktualisieren" />
-                        <MenuItem mnemonicParsing="false" onAction="#startTraining" text="Übung starten" />
-                        <MenuItem mnemonicParsing="false" onAction="#startRepetition" text="Wiederhohlung starten" />
+                        <MenuItem mnemonicParsing="false" onAction="#deleteDic" text="Wörterbuch löschen" />
+                        <MenuItem mnemonicParsing="false" onAction="#addVokabel" text="Vokabel hinzufügen" />
                         <MenuItem mnemonicParsing="false" onAction="#close" text="Close" />
                   </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
-                  </items>
+                <Menu mnemonicParsing="false" text="Übung">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#startTraining" text="Übung starten" />
+                        <MenuItem mnemonicParsing="false" onAction="#startRepetition" text="Wiederhohlung starten" />
+                     </items>
                 </Menu>
+                  <Menu fx:id="menu_dictionaries" mnemonicParsing="false" onAction="#initMenuDictionaries" text="Wörerbücher" />
               </menus>
             </MenuBar>
             <HBox spacing="10.0">
                <children>
-                  <Label text="ED Vokabel Trainer" textFill="WHITE">
+                  <Label fx:id="label_title" text="ED Vokabel Trainer" textFill="WHITE">
                      <font>
-                        <Font name="Corbel Bold" size="30.0" />
+                        <Font name="Corbel Bold" size="24.0" />
                      </font>
                   </Label>
                </children>
@@ -95,6 +124,21 @@
       <VBox prefWidth="20.0" BorderPane.alignment="CENTER" />
    </right>
    <bottom>
-      <VBox prefHeight="20.0" BorderPane.alignment="CENTER" />
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <HBox>
+               <children>
+                  <Label fx:id="info_label" textFill="WHITE" />
+                  <HBox HBox.hgrow="ALWAYS" />
+                  <Label text="© Eike Dreyer" textFill="WHITE" />
+               </children>
+               <VBox.margin>
+                  <Insets right="5.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </BorderPane.margin></VBox>
    </bottom>
 </BorderPane>

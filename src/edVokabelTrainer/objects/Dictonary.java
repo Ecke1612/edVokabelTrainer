@@ -35,10 +35,10 @@ public class Dictonary implements Serializable {
     public ArrayList<String> getListInSaveForm() {
         ArrayList<String> content = new ArrayList<>();
         for(EntrySet e: entrySets) {
-            content.add(e.getForeignWord() + "; " + e.getGermanWord() + ";" + e.getCorrectTranslated());
+            content.add(e.getForeignWord() + ";" + e.getGermanWord() + ";" + e.getCorrectTranslated());
         }
         for(EntrySet e: learndSets) {
-            content.add(e.getForeignWord() + "; " + e.getGermanWord() + ";" + e.getCorrectTranslated());
+            content.add(e.getForeignWord() + ";" + e.getGermanWord() + ";" + e.getCorrectTranslated());
         }
         return content;
     }

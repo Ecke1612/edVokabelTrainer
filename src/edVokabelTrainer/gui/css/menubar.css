@@ -1,0 +1,7 @@
+.menu-bar .container .menu:openvertically .label{
+    -fx-text-fill: white;
+}
+
+.context-menu {
+    -fx-background-color: rgb(66, 128, 57);
+}
