@@ -2,7 +2,9 @@ package edVokabelTrainer.handling;
 
 import com.ed.filehandler.ObjectSerializer;
 import com.ed.filehandler.PlainHandler;
+import edVokabelTrainer.Main;
 import edVokabelTrainer.objects.Dictonary;
+import edVokabelTrainer.objects.EntrySet;
 import edVokabelTrainer.objects.StoreSettingsObject;
 import javafx.stage.FileChooser;
 
@@ -31,7 +33,7 @@ public class DataHandling {
     }
 
     public void loadDictionary(File dicFile) {
-        ArrayList<String> stringlist = plainHandler.fileLoader(dicFile.getPath());
+        ArrayList<String> stringlist = plainHandler.fileLoaderUTF(dicFile.getPath());
         Dictonary dictonary = new Dictonary(dicFile.getName());
         dictonaries.add(dictonary);
         for (String s : stringlist) {
@@ -68,21 +70,21 @@ public class DataHandling {
     }
 
     public void save() {
-        if(!plainHandler.fileExist("saves")) {
-            plainHandler.createDir("saves");
+        if(!plainHandler.fileExist(Main.parentPath + "saves")) {
+            plainHandler.createDirs(Main.parentPath + "saves");
         }
-        objectSerializer.writeObject(storeSettingsObject, "saves/save.dat");
+        objectSerializer.writeObject(storeSettingsObject, Main.parentPath + "saves/save.dat");
         int counter = 0;
         for(String path : storeSettingsObject.getDictonaryStorePathes()) {
-            plainHandler.fileWriterNewLine(path, dictonaries.get(counter).getListInSaveForm());
+            plainHandler.fileWriterNewLineUTF(path, dictonaries.get(counter).getListInSaveForm());
             counter++;
         }
         System.out.println("saved");
     }
 
     public boolean loadFromFile() {
-        if(plainHandler.fileExist("saves/save.dat")) {
-            storeSettingsObject = (StoreSettingsObject) objectSerializer.loadObjects("saves/save.dat");
+        if(plainHandler.fileExist(Main.parentPath + "saves/save.dat")) {
+            storeSettingsObject = (StoreSettingsObject) objectSerializer.loadObjects(Main.parentPath + "saves/save.dat");
             reload();
             return true;
         } else {
@@ -98,6 +100,13 @@ public class DataHandling {
             loadDictionary(file);
             System.out.println("loaded " + file.getName());
         }
+    }
+
+    public void resetDictionary() {
+        for(EntrySet e : getActiveDictionary().getEntrySets()) {
+            e.resetCorrectTranslated();
+        }
+        System.out.println("dictionary resetted");
     }
 
     public ArrayList<Dictonary> getDictonaries() {

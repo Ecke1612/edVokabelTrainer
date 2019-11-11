@@ -29,6 +29,10 @@ public class EntrySet implements Serializable {
         }
     }
 
+    public void resetCorrectTranslated() {
+        correctTranslated = 0;
+    }
+
     public String getForeignWord() {
         return foreignWord;
     }

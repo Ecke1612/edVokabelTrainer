@@ -35,7 +35,7 @@ public class Controller {
     public Button btn_toggleTraining;
 
     private DataHandling datahandler = new DataHandling();
-    private Tools tools = new Tools();
+    private AddVokWindow addVokWindow = new AddVokWindow();
     private int globalRIndex = 0;
     private int learndIndex = 5;
     private Random random = new Random();
@@ -185,6 +185,7 @@ public class Controller {
                         entrySet.countCorrectTranslatedUp();
                         if (entrySet.getCorrectTranslated() >= learndIndex) {
                             datahandler.getActiveDictionary().moveToLearnd(entrySet);
+                            activeEntrySets.remove(entrySet);
                             info_label.setText(entrySet.getGermanWord() + " wurde als gelernt eingestuft. noch " + activeEntrySets.size() + " Vokablen zu lernen.");
                             System.out.println("Vokabel wurde als gelernt eingestuft");
                         }
@@ -201,6 +202,7 @@ public class Controller {
                     entrySet.countCorrectTranslatedDown();
                     if (repeatState) {
                         datahandler.getActiveDictionary().moveToEntrySet(entrySet);
+                        activeEntrySets.remove(entrySet);
                         info_label.setText(entrySet.getGermanWord() + " wurde zurück zu lernen verschoben. noch " + activeEntrySets.size() + " Vokablen zu wiederholen");
                     }
                 }
@@ -253,61 +255,9 @@ public class Controller {
     }
 
     public void addVokabel() {
-        Stage addVokStage = new Stage();
-        addVokStage.setTitle("Vokabel hinzufügen");
-        VBox mainVbox = new VBox(10);
-        Scene scene = new Scene(mainVbox);
-
-        VBox vBoxContent = new VBox(10);
-        HBox hboxInput = new HBox(10);
-        HBox hboxBtn = new HBox(10);
-
-        mainVbox.setPadding(new Insets(15));
-        hboxBtn.setAlignment(Pos.BOTTOM_RIGHT);
-
-        TextField txtForeign = new TextField();
-        TextField txtGerman = new TextField();
-
-        Button btn_okay = new Button("Hinzufügen");
-        Button btn_abort = new Button("Abbrechen");
-
-        Label labelOutput = new Label();
-
-        btn_okay.setOnAction(event -> {
-            addVokToList(txtForeign.getText(), txtGerman.getText(), labelOutput);
-            txtForeign.setText("");
-            txtGerman.setText("");
-            txtForeign.requestFocus();
-        });
-        btn_abort.setOnAction(event -> addVokStage.close());
-
-
-        hboxInput.getChildren().addAll(txtForeign, txtGerman);
-        hboxBtn.getChildren().addAll(btn_abort, btn_okay);
-        vBoxContent.getChildren().addAll(hboxInput, hboxBtn, labelOutput);
-        mainVbox.getChildren().addAll(vBoxContent);
-
-        mainVbox.addEventHandler(KeyEvent.KEY_PRESSED, ev -> {
-            if (ev.getCode() == KeyCode.ENTER) {
-                btn_okay.fire();
-                ev.consume();
-            }
-        });
-
-        addVokStage.setScene(scene);
-        addVokStage.setAlwaysOnTop(true);
-        addVokStage.showAndWait();
+        addVokWindow.drawWindow(datahandler);
     }
 
-    private void addVokToList(String foreign, String german, Label labelOutput) {
-        if(!foreign.equals("") && !german.equals("")) {
-            datahandler.getActiveDictionary().addEntry(foreign, german);
-            labelOutput.setText(foreign + " hinzugefügt");
-            datahandler.save();
-        } else {
-            labelOutput.setText("Vokabel konnte nicht hinzugefögt werden");
-        }
-    }
 
     private void setGlobalEventHandler(Node root) {
         root.addEventHandler(KeyEvent.KEY_PRESSED, ev -> {
