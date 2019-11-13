@@ -1,5 +1,5 @@
 I; Ich
-you; du
+you; zweiteS
 something; etwas
 me; mich
 self; selbst

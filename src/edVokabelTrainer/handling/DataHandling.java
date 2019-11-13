@@ -1,5 +1,6 @@
 package edVokabelTrainer.handling;
 
+import com.ed.filehandler.JsonHandler;
 import com.ed.filehandler.ObjectSerializer;
 import com.ed.filehandler.PlainHandler;
 import edVokabelTrainer.Main;
@@ -7,6 +8,7 @@ import edVokabelTrainer.objects.Dictonary;
 import edVokabelTrainer.objects.EntrySet;
 import edVokabelTrainer.objects.StoreSettingsObject;
 import javafx.stage.FileChooser;
+import org.json.simple.JSONArray;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -15,6 +17,8 @@ import java.util.Arrays;
 public class DataHandling {
 
     private PlainHandler plainHandler = new PlainHandler();
+    private JsonHandler jsonHandler = new JsonHandler();
+    private JsonDocHandler jsonDocHandler = new JsonDocHandler();
     private ArrayList<Dictonary> dictonaries = new ArrayList<>();
     private ObjectSerializer objectSerializer = new ObjectSerializer();
     private StoreSettingsObject storeSettingsObject = new StoreSettingsObject();
@@ -28,8 +32,15 @@ public class DataHandling {
         File dicFile = fileChooser.showOpenDialog(null);
         if(dicFile != null) {
             storeSettingsObject.addDicStorePath(dicFile.getPath());
-            loadDictionary(dicFile);
+            loadJsonDictionary(dicFile);
         }
+    }
+
+    public void loadJsonDictionary(File dicFile) {
+        JSONArray jarray = jsonHandler.readJsonArrayData(dicFile.getPath());
+        Dictonary dictonary = new Dictonary(dicFile.getName());
+        dictonary.setVokabelList(jsonDocHandler.convertJsonToVokList(jarray));
+        dictonaries.add(dictonary);
     }
 
     public void loadDictionary(File dicFile) {
@@ -55,10 +66,10 @@ public class DataHandling {
         if(dictonaries.size() > 0) {
             if(storeSettingsObject.getActiveDic() >= dictonaries.size()) {
                 System.out.println("reset aciteve Dic to 0");
-                storeSettingsObject.setActiveDic(0);
+                //storeSettingsObject.setActiveDic(0);
             }
-            System.out.println("return activ dic: " + storeSettingsObject.getActiveDic());
-            System.out.println("dic Size: " + dictonaries.get(storeSettingsObject.getActiveDic()).getEntrySets().size());
+            //System.out.println("return activ dic: " + storeSettingsObject.getActiveDic());
+            //System.out.println("dic Size: " + dictonaries.get(storeSettingsObject.getActiveDic()).getEntrySets().size());
             return dictonaries.get(storeSettingsObject.getActiveDic());
         }
         else return null;
@@ -76,7 +87,8 @@ public class DataHandling {
         objectSerializer.writeObject(storeSettingsObject, Main.parentPath + "saves/save.dat");
         int counter = 0;
         for(String path : storeSettingsObject.getDictonaryStorePathes()) {
-            plainHandler.fileWriterNewLineUTF(path, dictonaries.get(counter).getListInSaveForm());
+            //plainHandler.fileWriterNewLineUTF(path, dictonaries.get(counter).getListInSaveForm());
+            jsonHandler.writeJsonArrayData(jsonDocHandler.convertVokListToJson(dictonaries.get(counter).getVokabelList()), path);
             counter++;
         }
         System.out.println("saved");
@@ -97,7 +109,7 @@ public class DataHandling {
         dictonaries.clear();
         for (String path : storeSettingsObject.getDictonaryStorePathes()) {
             File file = new File(path);
-            loadDictionary(file);
+            loadJsonDictionary(file);
             System.out.println("loaded " + file.getName());
         }
     }

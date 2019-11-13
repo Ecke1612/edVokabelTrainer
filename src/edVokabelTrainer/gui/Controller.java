@@ -3,21 +3,14 @@ package edVokabelTrainer.gui;
 import edVokabelTrainer.handling.DataHandling;
 import edVokabelTrainer.objects.Dictonary;
 import edVokabelTrainer.objects.EntrySet;
-import edVokabelTrainer.objects.Tools;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
+import edVokabelTrainer.online.HTMLRequest;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -35,7 +28,7 @@ public class Controller {
     public Button btn_toggleTraining;
 
     private DataHandling datahandler = new DataHandling();
-    private AddVokWindow addVokWindow = new AddVokWindow();
+    private AddVokWindowOnline addVokWindowOnline = new AddVokWindowOnline();
     private int globalRIndex = 0;
     private int learndIndex = 5;
     private Random random = new Random();
@@ -46,6 +39,8 @@ public class Controller {
     private int countDics = 0;
     private boolean stateTrainingRunning = false;
     private boolean dicLoaded = false;
+    private HTMLRequest htmlRequest = new HTMLRequest();
+    private boolean playOnline = true;
 
     public Controller() {
 
@@ -108,7 +103,7 @@ public class Controller {
     }
 
     private void nextEntry() {
-        System.out.println("next Entry");
+        //System.out.println("next Entry");
         if(activeEntrySets.size() != 0) {
             EntrySet entrySet = pickEntrySet();
             label_vok.setText(entrySet.getGermanWord());
@@ -119,7 +114,7 @@ public class Controller {
     }
 
     private EntrySet pickEntrySet() {
-        System.out.println("entrySets size: " + activeEntrySets.size() + "; pickCounter: " + pickEntryCounter);
+        //System.out.println("entrySets size: " + activeEntrySets.size() + "; pickCounter: " + pickEntryCounter);
         int rIndex = random.nextInt(activeEntrySets.size());
         globalRIndex = rIndex;
         return activeEntrySets.get(rIndex);
@@ -137,14 +132,14 @@ public class Controller {
     }
 
     private void changeUIActiveState() {
-        System.out.println("stateTR: " + stateTrainingRunning + "; dicLoaded: " + datahandler.dicLoaded());
+        //System.out.println("stateTR: " + stateTrainingRunning + "; dicLoaded: " + datahandler.dicLoaded());
         if(datahandler.dicLoaded()) {
             btn_toggleTraining.setDisable(false);
             if (stateTrainingRunning) {
                 btn_ok.setDisable(false);
                 textfield.setDisable(false);
             } else {
-                System.out.println("deactivate UI");
+                //System.out.println("deactivate UI");
                 btn_ok.setDisable(true);
                 textfield.setDisable(true);
             }
@@ -155,7 +150,7 @@ public class Controller {
 
     private EntrySet pickEntrySet1() {
         ArrayList<EntrySet> entrySets = datahandler.getActiveDictionary().getEntrySets();
-        System.out.println("entrySets size: " + entrySets.size() + "; pickCounter: " + pickEntryCounter);
+        //System.out.println("entrySets size: " + entrySets.size() + "; pickCounter: " + pickEntryCounter);
         int rIndex = random.nextInt(entrySets.size());
         if(pickEntryCounter == entrySets.size() - 1) {
             pickEntryCounter = 0;
@@ -163,7 +158,7 @@ public class Controller {
         } else {
             double rDouble = random.nextDouble();
             double propability = (double) entrySets.get(rIndex).getCorrectTranslated() / (double) learndIndex;
-            System.out.println("rDouble = " + rDouble + "; prop: " + propability);
+            //System.out.println("rDouble = " + rDouble + "; prop: " + propability);
             if (rDouble > propability) {
                 globalRIndex = rIndex;
                 return entrySets.get(rIndex);
@@ -179,7 +174,9 @@ public class Controller {
         if(stateTrainingRunning) {
             if (vocableActive) {
                 EntrySet entrySet = activeEntrySets.get(globalRIndex);
-                String correctAnswer = entrySet.getForeignWord();
+                String correctAnswer = "";
+                correctAnswer = entrySet.getForeignWord();
+
                 if (textfield.getText().equals(correctAnswer) && !textfield.getText().equals("")) {
                     if (!repeatState) {
                         entrySet.countCorrectTranslatedUp();
@@ -221,10 +218,10 @@ public class Controller {
     }
 
     public void initMenuDictionaries() {
-        System.out.println("show dics");
+        //System.out.println("show dics");
         menu_dictionaries.getItems().clear();
         countDics = 0;
-        System.out.println("dic size: " + datahandler.getDictonaries().size());
+        //System.out.println("dic size: " + datahandler.getDictonaries().size());
         for(Dictonary d : datahandler.getDictonaries()) {
             int locDic = countDics;
             MenuItem menuItem = new MenuItem(d.getName());
@@ -239,7 +236,7 @@ public class Controller {
     private void changeDictionarySelection(int locDic) {
         stopTraining();
         datahandler.getStoreSettingsObject().setActiveDic(locDic);
-        System.out.println("active Dic: " + locDic);
+        //System.out.println("active Dic: " + locDic);
         info_label.setText(datahandler.getActiveDictionary().getName() + " wurde geladen");
         setTitle();
     }
@@ -255,7 +252,7 @@ public class Controller {
     }
 
     public void addVokabel() {
-        addVokWindow.drawWindow(datahandler);
+        addVokWindowOnline.drawWindow(datahandler);
     }
 
 
