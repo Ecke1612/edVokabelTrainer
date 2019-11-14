@@ -31,16 +31,18 @@ public class HTMLRequest {
         String[] splitted = selected.split(",");
         System.out.println(splitted.length + " Elemente");
         if(splitted.length == 1) {
-            vokabel.setSingular(splitted[0]);
+            vokabel.setSingular(splitted[0].trim());
         }
         else if(splitted.length == 2) {
-            vokabel.setSingular(splitted[0]);
+            vokabel.setSingular(splitted[0].trim());
             String[] plural = splitted[1].split(":");
-            vokabel.setPlural(plural[1]);
+            if(plural.length != 2) {
+                System.out.println("Fehler bei Plural");
+            } else vokabel.setPlural(plural[1].trim());
         }
         else if(splitted.length == 3) {
             String[] firstSplit = splitted[0].split(" ");
-            vokabel.setSingular(firstSplit[0]);
+            vokabel.setSingular(firstSplit[0].trim());
 
             String[] secondSplitt = splitted[2].split(" ");
             int count = 0;

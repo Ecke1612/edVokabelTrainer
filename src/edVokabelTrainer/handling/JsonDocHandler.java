@@ -1,5 +1,6 @@
 package edVokabelTrainer.handling;
 
+import edVokabelTrainer.objects.DicMetaData;
 import edVokabelTrainer.objects.Vokabel;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -12,10 +13,24 @@ public class JsonDocHandler {
 
     }
 
+    public JSONObject convertMetaToJson(DicMetaData dicMetaData) {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("sin", dicMetaData.getSin());
+        jsonObject.put("pl", dicMetaData.getPl());
+        jsonObject.put("ersteS", dicMetaData.getErsteS());
+        jsonObject.put("zweiteS", dicMetaData.getZweiteS());
+        jsonObject.put("dritteS", dicMetaData.getDritteS());
+        jsonObject.put("vierteP", dicMetaData.getVierteP());
+        return jsonObject;
+    }
+
     public JSONArray convertVokListToJson(ArrayList<Vokabel> vokabels) {
         JSONArray jsonArray = new JSONArray();
+        int count = 0;
         for(Vokabel v : vokabels) {
             jsonArray.add(convertVokToJson(v));
+            count++;
+            System.out.println("vokToJson added: " + count);
         }
         return jsonArray;
     }
@@ -40,6 +55,17 @@ public class JsonDocHandler {
             vokabels.add(convertJsonToVok((JSONObject) o));
         }
         return vokabels;
+    }
+
+    public DicMetaData readMeta(JSONObject jo) {
+        DicMetaData dicMetaData = new DicMetaData();
+        dicMetaData.setSin(jo.get("sin").toString());
+        dicMetaData.setPl(jo.get("pl").toString());
+        dicMetaData.setErsteS(jo.get("ersteS").toString());
+        dicMetaData.setZweiteS(jo.get("zweiteS").toString());
+        dicMetaData.setDritteS(jo.get("dritteS").toString());
+        dicMetaData.setVierteP(jo.get("vierteP").toString());
+        return dicMetaData;
     }
 
     private Vokabel convertJsonToVok(JSONObject jsonObject) {

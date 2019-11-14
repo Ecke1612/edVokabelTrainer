@@ -61,7 +61,7 @@ public class AddVokWindowOnline {
 
         btn_save.setOnAction(event -> {
             btn_search.setText("Speichern");
-            saveVokabel(datahandler, getVokabelByFields(labelOutput, txtGerman.getText()));
+            saveVokabel(datahandler, getVokabelByFields(labelOutput, txtGerman.getText()), labelOutput);
             btn_search.setText("Suchen");
             labelOutput.setText("Vokabel gespeichert");
         });
@@ -113,11 +113,8 @@ public class AddVokWindowOnline {
 
     private Vokabel getVokabelByFields(Label labelOut, String german) {
         int emptyCounter = 0;
-        int count = 0;
         for(TextField t : textFields) {
             if(t.getText().equals("")) emptyCounter++;
-            System.out.println(count + "/ " + textFields.size());
-            count++;
         }
         if(emptyCounter == textFields.size()) {
             labelOut.setText("mindestens ein Feld muss ausgefüllt sein");
@@ -134,9 +131,17 @@ public class AddVokWindowOnline {
         return null;
     }
 
-    private void saveVokabel(DataHandling dataHandling, Vokabel vokabel) {
-        dataHandling.getActiveDictionary().addVokabel(vokabel);
-        dataHandling.save();
+    private void saveVokabel(DataHandling dataHandling, Vokabel vokabel, Label labelOut) {
+        boolean contains = false;
+        for(Vokabel v : dataHandling.getActiveDictionary().getVokabelList()) {
+            if(v.getGerman().equals(vokabel.getGerman())) contains = true;
+        }
+        if(contains){
+            labelOut.setText("Vokabel existiert bereits");
+        } else {
+            dataHandling.getActiveDictionary().addVokabel(vokabel);
+            dataHandling.save();
+        }
     }
 
 }

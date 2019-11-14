@@ -9,6 +9,7 @@ import edVokabelTrainer.objects.EntrySet;
 import edVokabelTrainer.objects.StoreSettingsObject;
 import javafx.stage.FileChooser;
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -37,9 +38,24 @@ public class DataHandling {
     }
 
     public void loadJsonDictionary(File dicFile) {
-        JSONArray jarray = jsonHandler.readJsonArrayData(dicFile.getPath());
         Dictonary dictonary = new Dictonary(dicFile.getName());
-        dictonary.setVokabelList(jsonDocHandler.convertJsonToVokList(jarray));
+        try {
+            JSONObject jsonObject = jsonHandler.readJsonData(dicFile.getPath());
+
+            JSONObject jsMetaObject = (JSONObject) jsonObject.get("meta");
+            dictonary.setDicMetaData(jsonDocHandler.readMeta(jsMetaObject));
+
+            try {
+                JSONArray jarray = (JSONArray) jsonObject.get("vokabeln");
+                dictonary.setVokabelList(jsonDocHandler.convertJsonToVokList(jarray));
+            } catch(Exception e) {
+                e.printStackTrace();
+                System.out.println("Fehler beim JSON Vokabeln parsen");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Fehler beim Metadaten parsen");
+        }
         dictonaries.add(dictonary);
     }
 
@@ -88,7 +104,10 @@ public class DataHandling {
         int counter = 0;
         for(String path : storeSettingsObject.getDictonaryStorePathes()) {
             //plainHandler.fileWriterNewLineUTF(path, dictonaries.get(counter).getListInSaveForm());
-            jsonHandler.writeJsonArrayData(jsonDocHandler.convertVokListToJson(dictonaries.get(counter).getVokabelList()), path);
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("meta", jsonDocHandler.convertMetaToJson(dictonaries.get(counter).getDicMetaData()));
+            jsonObject.put("vokabeln", jsonDocHandler.convertVokListToJson(dictonaries.get(counter).getVokabelList()));
+            jsonHandler.writeJsonData(jsonObject, path);
             counter++;
         }
         System.out.println("saved");

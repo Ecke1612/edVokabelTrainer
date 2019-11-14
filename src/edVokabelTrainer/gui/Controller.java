@@ -2,7 +2,8 @@ package edVokabelTrainer.gui;
 
 import edVokabelTrainer.handling.DataHandling;
 import edVokabelTrainer.objects.Dictonary;
-import edVokabelTrainer.objects.EntrySet;
+import edVokabelTrainer.objects.Vokabel;
+import edVokabelTrainer.online.AutoRequest;
 import edVokabelTrainer.online.HTMLRequest;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -26,6 +27,7 @@ public class Controller {
     public Label label_title;
     public Label label_feedback;
     public Button btn_toggleTraining;
+    public Label label_person;
 
     private DataHandling datahandler = new DataHandling();
     private AddVokWindowOnline addVokWindowOnline = new AddVokWindowOnline();
@@ -34,13 +36,15 @@ public class Controller {
     private Random random = new Random();
     private int pickEntryCounter = 0;
     private boolean vocableActive = false;
-    private ArrayList<EntrySet> activeEntrySets;
+    private ArrayList<Vokabel> activeVokabelList;
     private boolean repeatState = false;
     private int countDics = 0;
     private boolean stateTrainingRunning = false;
+    private String correctAnswer;
+    private Vokabel chosenVokabel;
     private boolean dicLoaded = false;
-    private HTMLRequest htmlRequest = new HTMLRequest();
     private boolean playOnline = true;
+    private AutoRequest autoRequest = new AutoRequest();
 
     public Controller() {
 
@@ -83,8 +87,8 @@ public class Controller {
         } else {
             btn_toggleTraining.setText("\uE103");
             System.out.println("start training");
-            activeEntrySets = new ArrayList<>(datahandler.getActiveDictionary().getEntrySets());
-            info_label.setText(activeEntrySets.size() + " Vokablen geladen");
+            activeVokabelList = new ArrayList<>(datahandler.getActiveDictionary().getVokabelList());
+            info_label.setText(activeVokabelList.size() + " Vokablen geladen");
             repeatState = false;
             stateTrainingRunning = true;
             changeUIActiveState();
@@ -94,8 +98,8 @@ public class Controller {
 
     public void startRepetition() {
         System.out.println("start Repetition");
-        activeEntrySets = new ArrayList<>(datahandler.getActiveDictionary().getLearndSets());
-        info_label.setText(activeEntrySets.size() + " Vokablen geladen");
+        activeVokabelList = new ArrayList<>(datahandler.getActiveDictionary().getLearndVokabelList());
+        info_label.setText(activeVokabelList.size() + " Vokablen geladen");
         repeatState = true;
         stateTrainingRunning = true;
         changeUIActiveState();
@@ -104,25 +108,27 @@ public class Controller {
 
     private void nextEntry() {
         //System.out.println("next Entry");
-        if(activeEntrySets.size() != 0) {
-            EntrySet entrySet = pickEntrySet();
-            label_vok.setText(entrySet.getGermanWord());
+        if(activeVokabelList.size() != 0) {
+            chosenVokabel = pickVokabel();
+            label_vok.setText(chosenVokabel.getGerman());
+            int correctIndex = chooseFormFromVokabel(chosenVokabel);
+            label_person.setText(datahandler.getActiveDictionary().getDicMetaData().getPersonByIndex(correctIndex));
+            correctAnswer = chosenVokabel.getWordByIndex(correctIndex);
             vocableActive = true;
         } else {
             label_out.setText("Glückwunsch, alle Vokabeln gelernt");
         }
     }
 
-    private EntrySet pickEntrySet() {
-        //System.out.println("entrySets size: " + activeEntrySets.size() + "; pickCounter: " + pickEntryCounter);
-        int rIndex = random.nextInt(activeEntrySets.size());
+    private Vokabel pickVokabel() {
+        int rIndex = random.nextInt(activeVokabelList.size());
         globalRIndex = rIndex;
-        return activeEntrySets.get(rIndex);
+        return activeVokabelList.get(rIndex);
     }
 
     private void stopTraining() {
-        if(activeEntrySets != null) {
-            activeEntrySets.clear();
+        if(activeVokabelList != null) {
+            activeVokabelList.clear();
             label_vok.setText("");
             info_label.setText("Übungen wurde gestoppt");
             stateTrainingRunning = false;
@@ -147,7 +153,7 @@ public class Controller {
             btn_toggleTraining.setDisable(true);
         }
     }
-
+/*
     private EntrySet pickEntrySet1() {
         ArrayList<EntrySet> entrySets = datahandler.getActiveDictionary().getEntrySets();
         //System.out.println("entrySets size: " + entrySets.size() + "; pickCounter: " + pickEntryCounter);
@@ -168,39 +174,35 @@ public class Controller {
         }
         return null;
     }
-
+*/
 
     public void check_vok() {
         if(stateTrainingRunning) {
             if (vocableActive) {
-                EntrySet entrySet = activeEntrySets.get(globalRIndex);
-                String correctAnswer = "";
-                correctAnswer = entrySet.getForeignWord();
-
                 if (textfield.getText().equals(correctAnswer) && !textfield.getText().equals("")) {
                     if (!repeatState) {
-                        entrySet.countCorrectTranslatedUp();
-                        if (entrySet.getCorrectTranslated() >= learndIndex) {
-                            datahandler.getActiveDictionary().moveToLearnd(entrySet);
-                            activeEntrySets.remove(entrySet);
-                            info_label.setText(entrySet.getGermanWord() + " wurde als gelernt eingestuft. noch " + activeEntrySets.size() + " Vokablen zu lernen.");
+                        chosenVokabel.raisSuccessCount();
+                        if (chosenVokabel.getSuccessCount() >= learndIndex) {
+                            //datahandler.getActiveDictionary().moveToLearnd(chosenVokabel);
+                            //activeVokabelList.remove(chosenVokabel);
+                            info_label.setText(chosenVokabel.getGerman() + " wurde als gelernt eingestuft. noch " + activeVokabelList.size() + " Vokablen zu lernen.");
                             System.out.println("Vokabel wurde als gelernt eingestuft");
                         }
                     }
                     label_out.setTextFill(Color.WHITE);
-                    label_out.setText("Super! " + entrySet.getForeignWord() + " ist korrekt. (" + entrySet.getCorrectTranslated() + ")");
+                    label_out.setText("Super! " + correctAnswer + " ist korrekt. (" + chosenVokabel.getSuccessCount() + ")");
                     label_feedback.setText("\uE001");
                     label_feedback.setTextFill(Color.rgb(147,255,130));
                 } else {
                     label_out.setTextFill(Color.rgb(136, 0, 21));
-                    label_out.setText("Leider falsch. " + entrySet.getForeignWord() + " wäre richtig gewesen. (" + entrySet.getCorrectTranslated() + ")");
+                    label_out.setText("Leider falsch. " + correctAnswer + " wäre richtig gewesen. (" + chosenVokabel.getSuccessCount() + ")");
                     label_feedback.setText("\uE106");
                     label_feedback.setTextFill(Color.rgb(136,0,21));
-                    entrySet.countCorrectTranslatedDown();
+                    chosenVokabel.lowerSuccessCount();
                     if (repeatState) {
-                        datahandler.getActiveDictionary().moveToEntrySet(entrySet);
-                        activeEntrySets.remove(entrySet);
-                        info_label.setText(entrySet.getGermanWord() + " wurde zurück zu lernen verschoben. noch " + activeEntrySets.size() + " Vokablen zu wiederholen");
+                        //datahandler.getActiveDictionary().moveToEntrySet(chosenVokabel);
+                        //activeVokabelList.remove(chosenVokabel);
+                        info_label.setText(chosenVokabel.getSingular() + " wurde zurück zu lernen verschoben. noch " + activeVokabelList.size() + " Vokablen zu wiederholen");
                     }
                 }
                 textfield.setText("");
@@ -215,6 +217,17 @@ public class Controller {
         } else {
 
         }
+    }
+
+    private int chooseFormFromVokabel(Vokabel vokabel) {
+        ArrayList<Integer> availableWords = new ArrayList<>();
+        int count = 0;
+        for(String s : vokabel.getWordsAsList()) {
+            if(!s.equals("")) availableWords.add(count);
+            count++;
+        }
+        int index = random.nextInt(availableWords.size());
+        return availableWords.get(index);
     }
 
     public void initMenuDictionaries() {
@@ -263,6 +276,11 @@ public class Controller {
                 ev.consume();
             }
         });
+    }
+
+    public void autoImport() {
+        autoRequest.autoRequestPerFile(datahandler);
+        datahandler.reload();
     }
 
     public void close() {

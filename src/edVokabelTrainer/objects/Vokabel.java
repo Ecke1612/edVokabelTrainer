@@ -1,5 +1,7 @@
 package edVokabelTrainer.objects;
 
+import java.util.ArrayList;
+
 public class Vokabel {
 
     private String german;
@@ -20,7 +22,6 @@ public class Vokabel {
     }
 
     public void setSingular(String singular) {
-        System.out.println("singular set: " + singular);
         this.singular = singular;
     }
 
@@ -29,7 +30,6 @@ public class Vokabel {
     }
 
     public void setPlural(String plural) {
-        System.out.println("plural set: " + plural);
         this.plural = plural;
     }
 
@@ -38,7 +38,6 @@ public class Vokabel {
     }
 
     public void setErsteS(String ersteS) {
-        System.out.println("ersteS set: " + singular);
         this.ersteS = ersteS;
     }
 
@@ -46,9 +45,7 @@ public class Vokabel {
         return zweiteS;
     }
 
-    public void setZweiteS(String zweiteS) {
-        System.out.println("zweiteS set: " + singular);
-        this.zweiteS = zweiteS;
+    public void setZweiteS(String zweiteS) { this.zweiteS = zweiteS;
     }
 
     public String getDritteS() {
@@ -56,7 +53,6 @@ public class Vokabel {
     }
 
     public void setDritteS(String dritteS) {
-        System.out.println("dritteS set: " + singular);
         this.dritteS = dritteS;
     }
 
@@ -65,7 +61,6 @@ public class Vokabel {
     }
 
     public void setVierteP(String vierteP) {
-        System.out.println("vierteP set: " + singular);
         this.vierteP = vierteP;
     }
 
@@ -86,10 +81,33 @@ public class Vokabel {
     }
 
     public void lowerSuccessCount() {
-        successCount--;
+        if(successCount > 0) successCount--;
     }
 
     public void resetSuccesscount() {
         successCount = 0;
+    }
+
+    public ArrayList<String> getWordsAsList() {
+        ArrayList<String> list = new ArrayList<>();
+        list.add(singular);
+        list.add(plural);
+        list.add(ersteS);
+        list.add(zweiteS);
+        list.add(dritteS);
+        list.add(vierteP);
+        return list;
+    }
+
+    public String getWordByIndex(int index) {
+        switch (index) {
+            case 0: return singular;
+            case 1: return plural;
+            case 2: return ersteS;
+            case 3: return zweiteS;
+            case 4: return dritteS;
+            case 5: return vierteP;
+        }
+        return singular;
     }
 }

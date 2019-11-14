@@ -45,6 +45,11 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="10.0">
                <children>
+                  <Label fx:id="label_person" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
                   <TextField fx:id="textfield" prefHeight="32.0" prefWidth="303.0" stylesheets="@css/textfield.css">
                      <font>
                         <Font name="System Bold" size="14.0" />
@@ -85,6 +90,7 @@
                 <Menu mnemonicParsing="false" text="Datei">
                   <items>
                     <MenuItem mnemonicParsing="false" onAction="#importDic" text="Wörterbuch importieren" />
+                        <MenuItem fx:id="menu_auto" mnemonicParsing="false" onAction="#autoImport" text="Auto-Erstellung" />
                         <MenuItem mnemonicParsing="false" onAction="#deleteDic" text="Wörterbuch löschen" />
                         <MenuItem mnemonicParsing="false" onAction="#addVokabel" text="Vokabel hinzufügen" />
                         <MenuItem mnemonicParsing="false" onAction="#close" text="Close" />
