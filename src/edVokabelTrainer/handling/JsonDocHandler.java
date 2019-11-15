@@ -26,11 +26,8 @@ public class JsonDocHandler {
 
     public JSONArray convertVokListToJson(ArrayList<Vokabel> vokabels) {
         JSONArray jsonArray = new JSONArray();
-        int count = 0;
         for(Vokabel v : vokabels) {
             jsonArray.add(convertVokToJson(v));
-            count++;
-            System.out.println("vokToJson added: " + count);
         }
         return jsonArray;
     }

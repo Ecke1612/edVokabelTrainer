@@ -179,31 +179,19 @@ public class Controller {
     public void check_vok() {
         if(stateTrainingRunning) {
             if (vocableActive) {
-                if (textfield.getText().equals(correctAnswer) && !textfield.getText().equals("")) {
-                    if (!repeatState) {
-                        chosenVokabel.raisSuccessCount();
-                        if (chosenVokabel.getSuccessCount() >= learndIndex) {
-                            //datahandler.getActiveDictionary().moveToLearnd(chosenVokabel);
-                            //activeVokabelList.remove(chosenVokabel);
-                            info_label.setText(chosenVokabel.getGerman() + " wurde als gelernt eingestuft. noch " + activeVokabelList.size() + " Vokablen zu lernen.");
-                            System.out.println("Vokabel wurde als gelernt eingestuft");
-                        }
+                boolean answerIsCorrect = false;
+                String secondCorrectAnswer = "";
+                if(correctAnswer.startsWith("de") || correctAnswer.startsWith("dat")) {
+                    String[] temp = correctAnswer.split(" ");
+                    for(int i = 0; i < temp.length; i++) {
+                        if(i != 0) secondCorrectAnswer = secondCorrectAnswer + temp[i];
+                        System.out.println("second Answer: " + secondCorrectAnswer);
                     }
-                    label_out.setTextFill(Color.WHITE);
-                    label_out.setText("Super! " + correctAnswer + " ist korrekt. (" + chosenVokabel.getSuccessCount() + ")");
-                    label_feedback.setText("\uE001");
-                    label_feedback.setTextFill(Color.rgb(147,255,130));
+                }
+                if (textfield.getText().equals(correctAnswer) || textfield.getText().equals(secondCorrectAnswer)) {
+                    answerIsCorrect();
                 } else {
-                    label_out.setTextFill(Color.rgb(136, 0, 21));
-                    label_out.setText("Leider falsch. " + correctAnswer + " wäre richtig gewesen. (" + chosenVokabel.getSuccessCount() + ")");
-                    label_feedback.setText("\uE106");
-                    label_feedback.setTextFill(Color.rgb(136,0,21));
-                    chosenVokabel.lowerSuccessCount();
-                    if (repeatState) {
-                        //datahandler.getActiveDictionary().moveToEntrySet(chosenVokabel);
-                        //activeVokabelList.remove(chosenVokabel);
-                        info_label.setText(chosenVokabel.getSingular() + " wurde zurück zu lernen verschoben. noch " + activeVokabelList.size() + " Vokablen zu wiederholen");
-                    }
+                    answerIsNotCorrect();
                 }
                 textfield.setText("");
                 datahandler.save();
@@ -216,6 +204,35 @@ public class Controller {
             }
         } else {
 
+        }
+    }
+
+    private void answerIsCorrect() {
+        if (!repeatState) {
+            chosenVokabel.raisSuccessCount();
+            if (chosenVokabel.getSuccessCount() >= learndIndex) {
+                //datahandler.getActiveDictionary().moveToLearnd(chosenVokabel);
+                //activeVokabelList.remove(chosenVokabel);
+                info_label.setText(chosenVokabel.getGerman() + " wurde als gelernt eingestuft. noch " + activeVokabelList.size() + " Vokablen zu lernen.");
+                System.out.println("Vokabel wurde als gelernt eingestuft");
+            }
+        }
+        label_out.setTextFill(Color.WHITE);
+        label_out.setText("Super! " + correctAnswer + " ist korrekt. (" + chosenVokabel.getSuccessCount() + ")");
+        label_feedback.setText("\uE001");
+        label_feedback.setTextFill(Color.rgb(147,255,130));
+    }
+
+    private void answerIsNotCorrect() {
+        label_out.setTextFill(Color.rgb(136, 0, 21));
+        label_out.setText("Leider falsch. " + correctAnswer + " wäre richtig gewesen. (" + chosenVokabel.getSuccessCount() + ")");
+        label_feedback.setText("\uE106");
+        label_feedback.setTextFill(Color.rgb(136,0,21));
+        chosenVokabel.lowerSuccessCount();
+        if (repeatState) {
+            //datahandler.getActiveDictionary().moveToEntrySet(chosenVokabel);
+            //activeVokabelList.remove(chosenVokabel);
+            info_label.setText(chosenVokabel.getSingular() + " wurde zurück zu lernen verschoben. noch " + activeVokabelList.size() + " Vokablen zu wiederholen");
         }
     }
 
