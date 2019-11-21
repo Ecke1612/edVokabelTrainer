@@ -110,4 +110,8 @@ public class Vokabel {
         }
         return singular;
     }
+
+    public void setGerman(String german) {
+        this.german = german;
+    }
 }

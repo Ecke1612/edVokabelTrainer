@@ -185,13 +185,20 @@ public class Controller {
                     String[] temp = correctAnswer.split(" ");
                     for(int i = 0; i < temp.length; i++) {
                         if(i != 0) secondCorrectAnswer = secondCorrectAnswer + temp[i];
-                        System.out.println("second Answer: " + secondCorrectAnswer);
+                        //System.out.println("second Answer: " + secondCorrectAnswer);
                     }
                 }
-                if (textfield.getText().equals(correctAnswer) || textfield.getText().equals(secondCorrectAnswer)) {
-                    answerIsCorrect();
+                if(correctAnswer.split(" ").length == 1) {
+                    System.out.println("correct equals: " + correctAnswer);
+                    if(textfield.getText().equals(correctAnswer)) answerIsCorrect();
+                    else answerIsNotCorrect();
                 } else {
-                    answerIsNotCorrect();
+                    System.out.println("correct contains: " + " " + correctAnswer);
+                    if (textfield.getText().contains(" " + correctAnswer)) {
+                        answerIsCorrect();
+                    } else {
+                        answerIsNotCorrect();
+                    }
                 }
                 textfield.setText("");
                 datahandler.save();

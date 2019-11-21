@@ -1,6 +1,7 @@
 package edVokabelTrainer.online;
 
 import edVokabelTrainer.objects.Vokabel;
+import edVokabelTrainer.objects.VokabelBuilder;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -8,6 +9,8 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 
 public class HTMLRequest {
+
+    private VokabelBuilder vokabelBuilder = new VokabelBuilder();
 
     public Vokabel callHttp(String word) {
         try {
@@ -18,7 +21,7 @@ public class HTMLRequest {
             String sel = e1.text();
             System.out.println(sel);
             System.out.print(word + " hat: ");
-            Vokabel vokabel = buildVokabel(sel, word);
+            Vokabel vokabel = vokabelBuilder.buildVokabel(sel, word);
             return vokabel;
         } catch (IOException e) {
             e.printStackTrace();
@@ -26,57 +29,7 @@ public class HTMLRequest {
         return null;
     }
 
-    private Vokabel buildVokabel(String selected, String german) {
-        Vokabel vokabel = new Vokabel(german);
-        String[] splitted = selected.split(",");
-        System.out.println(splitted.length + " Elemente");
-        if(splitted.length == 1) {
-            vokabel.setSingular(splitted[0].trim());
-        }
-        else if(splitted.length == 2) {
-            vokabel.setSingular(splitted[0].trim());
-            String[] plural = splitted[1].split(":");
-            if(plural.length != 2) {
-                System.out.println("Fehler bei Plural");
-            } else vokabel.setPlural(plural[1].trim());
-        }
-        else if(splitted.length == 3) {
-            String[] firstSplit = splitted[0].split(" ");
-            vokabel.setSingular(firstSplit[0].trim());
 
-            String[] secondSplitt = splitted[2].split(" ");
-            int count = 0;
-            for(String s : secondSplitt) {
-                switch(s) {
-                    case "ik":
-                        vokabel.setErsteS(selectSplittedWord(secondSplitt, count));
-                        break;
-                    case "du":
-                        vokabel.setZweiteS(selectSplittedWord(secondSplitt, count));
-                        break;
-                    case "he/se/dat":
-                        vokabel.setDritteS(selectSplittedWord(secondSplitt, count));
-                        break;
-                    case "wi/ji/Se/se":
-                        vokabel.setVierteP(selectSplittedWord(secondSplitt, count));
-                        break;
-                }
-                count++;
-            }
-        }
-        int emptyCounter = 0;
-        for(String s : vokabel.getWordsAsList()) {
-            if(s.equals("")) emptyCounter++;
-        }
-        if(emptyCounter == vokabel.getWordsAsList().size()) return null;
-        else return vokabel;
-    }
-
-    private String selectSplittedWord(String[] str, int count) {
-        String select = str[count + 1];
-        String[] array = select.split("/");
-        return array[0].trim();
-    }
 
     private String buildURL(String word) {
         String strUrl = "https://www.platt-wb.de/hoch-platt/?term=" + word;

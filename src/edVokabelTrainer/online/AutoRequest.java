@@ -27,15 +27,21 @@ public class AutoRequest {
     private void iterateList(ArrayList<String> list, DataHandling dataHandling) {
         for(String s : list) {
             Vokabel vokabel = htmlRequest.callHttp(s);
-            dataHandling.getActiveDictionary().addVokabel(vokabel);
-            System.out.println("german: " + vokabel.getGerman());
-            System.out.println("singular: " + vokabel.getSingular());
-            System.out.println("1. sin: " + vokabel.getErsteS());
-            System.out.println("2. Sin: " + vokabel.getZweiteS());
-            System.out.println("3. Sin: " + vokabel.getDritteS());
-            System.out.println("4. Pl: " + vokabel.getVierteP());
-            System.out.println("-------------------------------------------------------------------------------");
-            System.out.println("");
+            if(vokabel != null) {
+                dataHandling.getActiveDictionary().addVokabel(vokabel);
+                System.out.println("german: " + vokabel.getGerman());
+                System.out.println("singular: " + vokabel.getSingular());
+                System.out.println("1. sin: " + vokabel.getErsteS());
+                System.out.println("2. Sin: " + vokabel.getZweiteS());
+                System.out.println("3. Sin: " + vokabel.getDritteS());
+                System.out.println("4. Pl: " + vokabel.getVierteP());
+                System.out.println("-------------------------------------------------------------------------------");
+                System.out.println("");
+            } else {
+                System.out.println(s + ": keine Daten dazu gefunden!");
+                System.out.println("-------------------------------------------------------------------------------");
+                System.out.println("");
+            }
         }
     }
 
