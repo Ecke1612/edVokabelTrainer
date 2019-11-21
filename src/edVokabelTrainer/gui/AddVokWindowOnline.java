@@ -22,6 +22,7 @@ public class AddVokWindowOnline {
 
     private ArrayList<TextField> textFields = new ArrayList<>();
     private HTMLRequest htmlRequest = new HTMLRequest();
+    private boolean searched = false;
 
     public void drawWindow(DataHandling datahandler) {
         textFields.clear();
@@ -64,6 +65,7 @@ public class AddVokWindowOnline {
             saveVokabel(datahandler, getVokabelByFields(labelOutput, txtGerman.getText()), labelOutput);
             btn_search.setText("Suchen");
             labelOutput.setText("Vokabel gespeichert");
+            searched = false;
         });
 
         btn_abort.setOnAction(event -> addVokStage.close());
@@ -79,8 +81,13 @@ public class AddVokWindowOnline {
 
         mainVbox.addEventHandler(KeyEvent.KEY_PRESSED, ev -> {
             if (ev.getCode() == KeyCode.ENTER) {
-                btn_search.fire();
-                ev.consume();
+                if(!searched) {
+                    btn_search.fire();
+                    ev.consume();
+                } else {
+                    btn_save.fire();
+                    ev.consume();
+                }
             }
         });
 
@@ -103,12 +110,17 @@ public class AddVokWindowOnline {
 
     private void searchVokabel(String germanWord) {
         Vokabel vokabel = htmlRequest.callHttp(germanWord);
-        textFields.get(0).setText(vokabel.getSingular());
-        textFields.get(1).setText(vokabel.getPlural());
-        textFields.get(2).setText(vokabel.getErsteS());
-        textFields.get(3).setText(vokabel.getZweiteS());
-        textFields.get(4).setText(vokabel.getDritteS());
-        textFields.get(5).setText(vokabel.getVierteP());
+        if(vokabel != null) {
+            textFields.get(0).setText(vokabel.getSingular());
+            textFields.get(1).setText(vokabel.getPlural());
+            textFields.get(2).setText(vokabel.getErsteS());
+            textFields.get(3).setText(vokabel.getZweiteS());
+            textFields.get(4).setText(vokabel.getDritteS());
+            textFields.get(5).setText(vokabel.getVierteP());
+            searched = true;
+        } else {
+            System.out.println("Wort nicht gefunden");
+        }
     }
 
     private Vokabel getVokabelByFields(Label labelOut, String german) {

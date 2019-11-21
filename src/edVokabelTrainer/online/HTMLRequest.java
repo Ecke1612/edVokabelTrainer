@@ -64,7 +64,12 @@ public class HTMLRequest {
                 count++;
             }
         }
-        return vokabel;
+        int emptyCounter = 0;
+        for(String s : vokabel.getWordsAsList()) {
+            if(s.equals("")) emptyCounter++;
+        }
+        if(emptyCounter == vokabel.getWordsAsList().size()) return null;
+        else return vokabel;
     }
 
     private String selectSplittedWord(String[] str, int count) {

@@ -5,7 +5,6 @@ import com.ed.filehandler.ObjectSerializer;
 import com.ed.filehandler.PlainHandler;
 import edVokabelTrainer.Main;
 import edVokabelTrainer.objects.Dictonary;
-import edVokabelTrainer.objects.EntrySet;
 import edVokabelTrainer.objects.StoreSettingsObject;
 import javafx.stage.FileChooser;
 import org.json.simple.JSONArray;
@@ -13,8 +12,6 @@ import org.json.simple.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
-
 public class DataHandling {
 
     private PlainHandler plainHandler = new PlainHandler();
@@ -57,24 +54,6 @@ public class DataHandling {
             System.out.println("Fehler beim Metadaten parsen");
         }
         dictonaries.add(dictonary);
-    }
-
-    public void loadDictionary(File dicFile) {
-        ArrayList<String> stringlist = plainHandler.fileLoaderUTF(dicFile.getPath());
-        Dictonary dictonary = new Dictonary(dicFile.getName());
-        dictonaries.add(dictonary);
-        for (String s : stringlist) {
-            String[] str = s.split(";");
-            if(str.length == 2) dictonary.addEntry(str[0], str[1]);
-            else if(str.length == 3) {
-                dictonary.addEntry(str[0], str[1], Integer.parseInt(str[2]), 5);
-            }
-            else {
-                System.out.println("Import Parsing Error - WRONG ARRAY LENGTH: " + str.length);
-                System.out.println(Arrays.toString(str));
-            }
-        }
-        System.out.println(dicFile.getName() + " wurde mit " + dictonary.getEntrySets().size() + " geladen");
     }
 
 
@@ -131,13 +110,6 @@ public class DataHandling {
             loadJsonDictionary(file);
             System.out.println("loaded " + file.getName());
         }
-    }
-
-    public void resetDictionary() {
-        for(EntrySet e : getActiveDictionary().getEntrySets()) {
-            e.resetCorrectTranslated();
-        }
-        System.out.println("dictionary resetted");
     }
 
     public ArrayList<Dictonary> getDictonaries() {
