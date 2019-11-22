@@ -16,19 +16,26 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import javax.xml.crypto.Data;
+import javax.xml.soap.Text;
 import java.util.ArrayList;
 
 public class AddVokWindowOnline {
 
     private ArrayList<TextField> textFields = new ArrayList<>();
     private HTMLRequest htmlRequest = new HTMLRequest();
+    private TextField txtGerman = new TextField();
     private boolean searched = false;
+    private boolean isEditMode = false;
+    private Vokabel tempEditVokabel;
+    private Stage addVokStage;
 
     public void drawWindow(DataHandling datahandler) {
         textFields.clear();
 
-        Stage addVokStage = new Stage();
-        addVokStage.setTitle("Vokabel hinzufügen");
+        addVokStage = new Stage();
+        if(isEditMode) addVokStage.setTitle("Vokabel editieren");
+        else addVokStage.setTitle("Vokabel hinzufügen");
         VBox mainVbox = new VBox(10);
         Scene scene = new Scene(mainVbox);
 
@@ -45,8 +52,6 @@ public class AddVokWindowOnline {
         Label labelForeign = new Label("Fremdwort");
         Label labelGerman = new Label("Deutsch");
 
-        TextField txtGerman = new TextField();
-
         Button btn_search = new Button("Suchen");
         Button btn_abort = new Button("Abbrechen");
         Button btn_save = new Button("Speichern");
@@ -61,10 +66,14 @@ public class AddVokWindowOnline {
         });
 
         btn_save.setOnAction(event -> {
-            btn_search.setText("Speichern");
-            saveVokabel(datahandler, getVokabelByFields(labelOutput, txtGerman.getText()), labelOutput);
-            btn_search.setText("Suchen");
-            labelOutput.setText("Vokabel gespeichert");
+            if(isEditMode) {
+                saveEditedVok(datahandler, labelOutput);
+                labelOutput.setText("Vokabel editiert");
+            }
+            else {
+                saveVokabel(datahandler, getVokabelByFields(labelOutput, new Vokabel(txtGerman.getText())), labelOutput);
+                labelOutput.setText("Vokabel gespeichert");
+            }
             searched = false;
         });
 
@@ -93,7 +102,19 @@ public class AddVokWindowOnline {
 
         addVokStage.setScene(scene);
         addVokStage.setAlwaysOnTop(true);
-        addVokStage.showAndWait();
+        addVokStage.show();
+    }
+
+    public void setFieldsFromVokabel(Vokabel vokabel) {
+        txtGerman.setText(vokabel.getGerman());
+        textFields.get(0).setText(vokabel.getSingular());
+        textFields.get(1).setText(vokabel.getPlural());
+        textFields.get(2).setText(vokabel.getErsteS());
+        textFields.get(3).setText(vokabel.getZweiteS());
+        textFields.get(4).setText(vokabel.getDritteS());
+        textFields.get(5).setText(vokabel.getVierteP());
+        tempEditVokabel = vokabel;
+        searched = true;
     }
 
     private HBox getLabel_Field(String text) {
@@ -111,19 +132,13 @@ public class AddVokWindowOnline {
     private void searchVokabel(String germanWord) {
         Vokabel vokabel = htmlRequest.callHttp(germanWord);
         if(vokabel != null) {
-            textFields.get(0).setText(vokabel.getSingular());
-            textFields.get(1).setText(vokabel.getPlural());
-            textFields.get(2).setText(vokabel.getErsteS());
-            textFields.get(3).setText(vokabel.getZweiteS());
-            textFields.get(4).setText(vokabel.getDritteS());
-            textFields.get(5).setText(vokabel.getVierteP());
-            searched = true;
+            setFieldsFromVokabel(vokabel);
         } else {
             System.out.println("Wort nicht gefunden");
         }
     }
 
-    private Vokabel getVokabelByFields(Label labelOut, String german) {
+    private Vokabel getVokabelByFields(Label labelOut, Vokabel vokabel) {
         int emptyCounter = 0;
         for(TextField t : textFields) {
             if(t.getText().equals("")) emptyCounter++;
@@ -131,7 +146,6 @@ public class AddVokWindowOnline {
         if(emptyCounter == textFields.size()) {
             labelOut.setText("mindestens ein Feld muss ausgefüllt sein");
         } else {
-            Vokabel vokabel = new Vokabel(german);
             vokabel.setSingular(textFields.get(0).getText());
             vokabel.setPlural(textFields.get(1).getText());
             vokabel.setErsteS(textFields.get(2).getText());
@@ -144,16 +158,46 @@ public class AddVokWindowOnline {
     }
 
     private void saveVokabel(DataHandling dataHandling, Vokabel vokabel, Label labelOut) {
-        boolean contains = false;
-        for(Vokabel v : dataHandling.getActiveDictionary().getVokabelList()) {
-            if(v.getGerman().equals(vokabel.getGerman())) contains = true;
-        }
-        if(contains){
+        if(checkForDuplicates(dataHandling, vokabel)){
             labelOut.setText("Vokabel existiert bereits");
         } else {
             dataHandling.getActiveDictionary().addVokabel(vokabel);
             dataHandling.save();
+            resetFields();
         }
     }
+
+    private void saveEditedVok(DataHandling dataHandling, Label labelOut) {
+        System.out.println("Vok removed: " + dataHandling.getActiveDictionary().getVokabelList().remove(tempEditVokabel));
+        dataHandling.getActiveDictionary().getVokabelList().add(getVokabelByFields(labelOut, new Vokabel(txtGerman.getText())));
+        System.out.println("Vokabel editiert");
+        isEditMode = false;
+        addVokStage.close();
+        dataHandling.save();
+    }
+
+    public void setEditMode(boolean editMode) {
+        isEditMode = editMode;
+    }
+
+    private boolean checkForDuplicates(DataHandling dataHandling, Vokabel vokabel) {
+        boolean contains = false;
+        for(Vokabel v : dataHandling.getActiveDictionary().getVokabelList()) {
+            //System.out.println(v.getGerman() + " : " + vokabel.getGerman());
+            if(v.getGerman().equals(vokabel.getGerman())) {
+                contains = true;
+                System.out.println("Duplicate Found");
+            }
+        }
+        return contains;
+    }
+
+    private void resetFields() {
+        for(TextField t : textFields) {
+            t.setText("");
+        }
+        txtGerman.setText("");
+    }
+
 
 }

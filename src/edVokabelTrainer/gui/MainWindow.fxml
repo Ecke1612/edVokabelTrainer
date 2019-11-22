@@ -55,6 +55,11 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </TextField>
+                  <Button fx:id="btn_editvok" mnemonicParsing="false" onAction="#editVok" style="-fx-background-color: transparent;" text="" textFill="WHITE">
+                     <font>
+                        <Font name="Segoe MDL2 Assets" size="17.0" />
+                     </font>
+                  </Button>
                   <Label fx:id="label_feedback" textFill="#93ff82">
                      <font>
                         <Font name="Segoe MDL2 Assets" size="24.0" />

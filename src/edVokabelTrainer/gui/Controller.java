@@ -28,6 +28,7 @@ public class Controller {
     public Label label_feedback;
     public Button btn_toggleTraining;
     public Label label_person;
+    public Button btn_editvok;
 
     private DataHandling datahandler = new DataHandling();
     private AddVokWindowOnline addVokWindowOnline = new AddVokWindowOnline();
@@ -144,10 +145,12 @@ public class Controller {
             if (stateTrainingRunning) {
                 btn_ok.setDisable(false);
                 textfield.setDisable(false);
+                btn_editvok.setDisable(false);
             } else {
                 //System.out.println("deactivate UI");
                 btn_ok.setDisable(true);
                 textfield.setDisable(true);
+                btn_editvok.setDisable(true);
             }
         } else {
             btn_toggleTraining.setDisable(true);
@@ -268,6 +271,12 @@ public class Controller {
             menu_dictionaries.getItems().add(menuItem);
             countDics++;
         }
+    }
+
+    public void editVok() {
+        addVokWindowOnline.drawWindow(datahandler);
+        addVokWindowOnline.setEditMode(true);
+        addVokWindowOnline.setFieldsFromVokabel(datahandler.getActiveDictionary().getVokabelList().get(globalRIndex));
     }
 
     private void changeDictionarySelection(int locDic) {
