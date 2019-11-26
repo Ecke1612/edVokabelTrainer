@@ -1,5 +1,7 @@
 package edVokabelTrainer.objects;
 
+import edVokabelTrainer.gui.Controller;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -26,12 +28,12 @@ public class Dictonary implements Serializable {
         return vokabelList;
     }
 
-    public void moveToLearnd(Vokabel vokabel) {
+    public void moveVokabelToLearnd(Vokabel vokabel) {
         vokabelList.remove(vokabel);
         learndVokabelList.add(vokabel);
     }
 
-    public void moveToEntrySet(Vokabel vokabel) {
+    public void moveVokabelToActiveList(Vokabel vokabel) {
         learndVokabelList.remove(vokabel);
         vokabelList.add(vokabel);
     }

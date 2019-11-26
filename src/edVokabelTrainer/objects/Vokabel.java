@@ -114,4 +114,12 @@ public class Vokabel {
     public void setGerman(String german) {
         this.german = german;
     }
+
+    public int getSettetFieldCount() {
+        int count = 0;
+        for(String s : getWordsAsList()) {
+            if(!s.equals("")) count++;
+        }
+        return count;
+    }
 }

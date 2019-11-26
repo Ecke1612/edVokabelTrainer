@@ -103,8 +103,8 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Übung">
                      <items>
-                        <MenuItem mnemonicParsing="false" onAction="#startTraining" text="Übung starten" />
-                        <MenuItem mnemonicParsing="false" onAction="#startRepetition" text="Wiederhohlung starten" />
+                        <MenuItem fx:id="menuExercise" mnemonicParsing="false" onAction="#startTraining" text="Übung starten" />
+                        <MenuItem fx:id="menuRepetition" mnemonicParsing="false" onAction="#startRepetition" text="Wiederhohlung starten" />
                      </items>
                 </Menu>
                   <Menu fx:id="menu_dictionaries" mnemonicParsing="false" onAction="#initMenuDictionaries" text="Wörerbücher" />

@@ -45,6 +45,9 @@ public class DataHandling {
             try {
                 JSONArray jarray = (JSONArray) jsonObject.get("vokabeln");
                 dictonary.setVokabelList(jsonDocHandler.convertJsonToVokList(jarray));
+
+                JSONArray jarrayLerned = (JSONArray) jsonObject.get("gelernte");
+                dictonary.setLearndVokabelList(jsonDocHandler.convertJsonToVokList(jarrayLerned));
             } catch(Exception e) {
                 e.printStackTrace();
                 System.out.println("Fehler beim JSON Vokabeln parsen");
@@ -86,6 +89,7 @@ public class DataHandling {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("meta", jsonDocHandler.convertMetaToJson(dictonaries.get(counter).getDicMetaData()));
             jsonObject.put("vokabeln", jsonDocHandler.convertVokListToJson(dictonaries.get(counter).getVokabelList()));
+            jsonObject.put("gelernte", jsonDocHandler.convertVokListToJson(dictonaries.get(counter).getLearndVokabelList()));
             jsonHandler.writeJsonData(jsonObject, path);
             counter++;
         }
