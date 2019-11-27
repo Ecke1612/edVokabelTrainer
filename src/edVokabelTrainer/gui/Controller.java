@@ -13,6 +13,8 @@ import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Controller {
 
@@ -116,7 +118,8 @@ public class Controller {
             chosenVokabel = pickVokabel();
             label_vok.setText(chosenVokabel.getGerman());
             int settetFields = chosenVokabel.getSettetFieldCount();
-            info_label.setText("Vokabel hat " + settetFields + " Wörter, es bedarf einen Lernindex von: " + learnIndex * (1 + ((settetFields  - 1)* 0.5)) + " um als gelernt zu gelten.");
+            int calculatedLearnIndex =(int)(learnIndex * (1 + ((settetFields  - 1)* 0.5)));
+            info_label.setText("Vokabel hat " + settetFields + " Wörter, es bedarf einen Lernindex von: " + calculatedLearnIndex + " um als gelernt zu gelten.");
             int correctIndex = chooseFormFromVokabel(chosenVokabel);
             label_person.setText(datahandler.getActiveDictionary().getDicMetaData().getPersonByIndex(correctIndex));
             correctAnswer = chosenVokabel.getWordByIndex(correctIndex);
@@ -193,7 +196,7 @@ public class Controller {
                     else answerIsNotCorrect();
                 } else {
                     System.out.println("correct contains: " + correctAnswer);
-                    if (correctAnswer.contains(textfield.getText())) {
+                    if (isContain(correctAnswer, textfield.getText()) && !textfield.getText().equals("de") && !textfield.getText().equals("dat")) {
                         answerIsCorrect();
                     } else {
                         answerIsNotCorrect();
@@ -216,7 +219,8 @@ public class Controller {
     private void answerIsCorrect() {
         if (!repeatState) {
             chosenVokabel.raisSuccessCount();
-            if (chosenVokabel.getSuccessCount() >= (learnIndex * (1 + ((chosenVokabel.getSettetFieldCount()  - 1)* 0.6)))) {
+            int calculatedLearnIndex =(int)(learnIndex * (1 + ((chosenVokabel.getSettetFieldCount()  - 1)* 0.5)));
+            if (chosenVokabel.getSuccessCount() >= calculatedLearnIndex) {
                 datahandler.getActiveDictionary().moveVokabelToLearnd(chosenVokabel);
                 //activeVokabelList.remove(chosenVokabel);
                 info_label.setText(chosenVokabel.getGerman() + " wurde als gelernt eingestuft. noch " + activeVokabelList.size() + " Vokablen zu lernen.");
@@ -228,6 +232,13 @@ public class Controller {
         label_out.setText("Super! " + correctAnswer + " ist korrekt. (" + chosenVokabel.getSuccessCount() + ")");
         label_feedback.setText("\uE001");
         label_feedback.setTextFill(Color.rgb(147,255,130));
+    }
+
+    private boolean isContain(String source, String subTerm) {
+        String pattern = "\\b" + subTerm + "\\b";
+        Pattern p = Pattern.compile(pattern);
+        Matcher m = p.matcher(source);
+        return m.find();
     }
 
     private void answerIsNotCorrect() {
