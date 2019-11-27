@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    private static final double version = 0.20;
+    private static final double version = 0.25;
     private static final String appName = "Vokabeltrainer";
     public static final String parentPath = "bin/apps/" + appName + "/";
 
