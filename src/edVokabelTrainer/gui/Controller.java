@@ -196,7 +196,8 @@ public class Controller {
                     else answerIsNotCorrect();
                 } else {
                     System.out.println("correct contains: " + correctAnswer);
-                    if (isContain(correctAnswer, textfield.getText()) && !textfield.getText().equals("de") && !textfield.getText().equals("dat")) {
+                    String answer = textfield.getText();
+                    if (isContain(correctAnswer, answer) && !answer.equals("de") && !answer.equals("dat") && !answer.trim().equals("")) {
                         answerIsCorrect();
                     } else {
                         answerIsNotCorrect();
@@ -284,8 +285,12 @@ public class Controller {
     }
 
     private void initMenuVokSize() {
-        menuExercise.setText("Übung starten (" + datahandler.getActiveDictionary().getVokabelList().size() + ")");
-        menuRepetition.setText("Wiederholung starten (" + datahandler.getActiveDictionary().getLearndVokabelList().size() + ")");
+        try {
+            menuExercise.setText("Übung starten (" + datahandler.getActiveDictionary().getVokabelList().size() + ")");
+            menuRepetition.setText("Wiederholung starten (" + datahandler.getActiveDictionary().getLearndVokabelList().size() + ")");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void editVok() {

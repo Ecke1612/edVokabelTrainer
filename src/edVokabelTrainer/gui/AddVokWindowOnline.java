@@ -25,10 +25,13 @@ public class AddVokWindowOnline {
     private ArrayList<TextField> textFields = new ArrayList<>();
     private HTMLRequest htmlRequest = new HTMLRequest();
     private TextField txtGerman = new TextField();
-    private boolean searched = false;
+    private boolean searched = true;
     private boolean isEditMode = false;
     private Vokabel tempEditVokabel;
     private Stage addVokStage;
+    private Button btn_search;
+    private Button btn_save;
+    private Button btn_abort;
 
     public void drawWindow(DataHandling datahandler) {
         textFields.clear();
@@ -52,10 +55,13 @@ public class AddVokWindowOnline {
         Label labelForeign = new Label("Fremdwort");
         Label labelGerman = new Label("Deutsch");
 
-        Button btn_search = new Button("Suchen");
-        Button btn_abort = new Button("Abbrechen");
-        Button btn_save = new Button("Speichern");
+        btn_search = new Button("Suchen");
+        btn_abort = new Button("Abbrechen");
+        btn_abort.setStyle("-fx-background-color:  rgb(85, 85, 85);" +
+                "-fx-text-fill: white;");
+        btn_save = new Button("Speichern");
 
+        switchButtonToSearch();
 
         Label labelOutput = new Label();
 
@@ -74,7 +80,8 @@ public class AddVokWindowOnline {
                 saveVokabel(datahandler, getVokabelByFields(labelOutput, new Vokabel(txtGerman.getText())), labelOutput);
                 labelOutput.setText("Vokabel gespeichert");
             }
-            searched = false;
+            //searched = false;
+            switchButtonToSearch();
         });
 
         btn_abort.setOnAction(event -> addVokStage.close());
@@ -114,7 +121,8 @@ public class AddVokWindowOnline {
         textFields.get(4).setText(vokabel.getDritteS());
         textFields.get(5).setText(vokabel.getVierteP());
         tempEditVokabel = vokabel;
-        searched = true;
+        //searched = true;
+        switchButtonToSave();
     }
 
     private HBox getLabel_Field(String text) {
@@ -158,7 +166,7 @@ public class AddVokWindowOnline {
     }
 
     private void saveVokabel(DataHandling dataHandling, Vokabel vokabel, Label labelOut) {
-        if(checkForDuplicates(dataHandling, vokabel)){
+        if(checkForDuplicates(dataHandling, vokabel, labelOut)){
             labelOut.setText("Vokabel existiert bereits");
         } else {
             dataHandling.getActiveDictionary().addVokabel(vokabel);
@@ -180,13 +188,14 @@ public class AddVokWindowOnline {
         isEditMode = editMode;
     }
 
-    private boolean checkForDuplicates(DataHandling dataHandling, Vokabel vokabel) {
+    private boolean checkForDuplicates(DataHandling dataHandling, Vokabel vokabel, Label label_out) {
         boolean contains = false;
         for(Vokabel v : dataHandling.getActiveDictionary().getVokabelList()) {
             //System.out.println(v.getGerman() + " : " + vokabel.getGerman());
             if(v.getGerman().equals(vokabel.getGerman())) {
                 contains = true;
                 System.out.println("Duplicate Found");
+                label_out.setText("Vokabel bereits vorhanden");
             }
         }
         return contains;
@@ -199,5 +208,21 @@ public class AddVokWindowOnline {
         txtGerman.setText("");
     }
 
+    private void switchButtonToSearch() {
+        searched = false;
+
+        btn_search.setStyle("-fx-background-color: rgb(86, 148, 77);" +
+                "-fx-text-fill: white;");
+        btn_save.setStyle("-fx-background-color: rgb(85, 85, 85);" +
+                "-fx-text-fill: white;");
+    }
+
+    private void switchButtonToSave() {
+        searched = true;
+        btn_search.setStyle("-fx-background-color:  rgb(85, 85, 85);" +
+                "-fx-text-fill: white;");
+        btn_save.setStyle("-fx-background-color: rgb(86, 148, 77);" +
+                "-fx-text-fill: white;");
+    }
 
 }
