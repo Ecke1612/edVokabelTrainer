@@ -3,7 +3,6 @@ package edVokabelTrainer.objects;
 public class VokabelBuilder {
 
 
-
     public Vokabel buildVokabel(String selected, String german) {
         Vokabel vokabel = new Vokabel(german);
         String[] mainSplitted = selected.split(",");

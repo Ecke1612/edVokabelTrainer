@@ -115,6 +115,7 @@ public class Controller {
     private void nextEntry() {
         //System.out.println("next Entry");
         textfield.setText("");
+        textfield.setStyle("-fx-text-fill: white");
         if(activeVokabelList.size() != 0) {
             chosenVokabel = pickVokabel();
             label_vok.setText(chosenVokabel.getGerman());
@@ -204,6 +205,7 @@ public class Controller {
                         answerIsNotCorrect();
                     }
                 }
+                textfield.setStyle("-fx-text-fill: rgb(125,175,125)");
                 datahandler.save();
                 btn_ok.setText("Nächste");
                 vocableActive = false;
