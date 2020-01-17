@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" prefHeight="250.0" prefWidth="600.0" style="-fx-background-color: rgb(86, 148, 77);" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edVokabelTrainer.gui.Controller">
+<BorderPane fx:id="borderPane" prefHeight="250.0" prefWidth="800.0" style="-fx-background-color: rgb(86, 148, 77);" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edVokabelTrainer.gui.Controller">
    <center>
       <VBox spacing="15.0" BorderPane.alignment="CENTER">
          <children>
@@ -45,12 +45,12 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="10.0">
                <children>
-                  <Label fx:id="label_person" textFill="WHITE">
+                  <Label fx:id="label_person" text="Singular" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="textfield" prefHeight="32.0" prefWidth="303.0" stylesheets="@css/textfield.css">
+                  <TextField fx:id="textfield" prefHeight="32.0" prefWidth="450.0" stylesheets="@css/textfield.css">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -65,18 +65,22 @@
                         <Font name="Segoe MDL2 Assets" size="24.0" />
                      </font>
                   </Label>
+                  <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Button fx:id="btn_ok" mnemonicParsing="false" onAction="#check_vok" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 5;" text="Prüfen" textFill="WHITE">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
+                           </padding>
+                        </Button>
+                     </children>
+                  </HBox>
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="10.0">
                <children>
-                  <Button fx:id="btn_ok" mnemonicParsing="false" onAction="#check_vok" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 5;" text="Prüfen" textFill="WHITE">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                     <padding>
-                        <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
-                     </padding>
-                  </Button>
                   <Label fx:id="label_out" textFill="WHITE">
                      <font>
                         <Font size="18.0" />

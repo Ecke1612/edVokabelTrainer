@@ -114,6 +114,7 @@ public class Controller {
 
     private void nextEntry() {
         //System.out.println("next Entry");
+        textfield.setText("");
         if(activeVokabelList.size() != 0) {
             chosenVokabel = pickVokabel();
             label_vok.setText(chosenVokabel.getGerman());
@@ -190,7 +191,7 @@ public class Controller {
     public void check_vok() {
         if(stateTrainingRunning) {
             if (vocableActive) {
-                if(correctAnswer.split(" ").length == 1) {
+                if(correctAnswer.split(" ").length == 1 || correctAnswer.split(" ").length >= 3) {
                     System.out.println("correct equals: " + correctAnswer);
                     if(textfield.getText().equals(correctAnswer)) answerIsCorrect();
                     else answerIsNotCorrect();
@@ -203,7 +204,6 @@ public class Controller {
                         answerIsNotCorrect();
                     }
                 }
-                textfield.setText("");
                 datahandler.save();
                 btn_ok.setText("Nächste");
                 vocableActive = false;
