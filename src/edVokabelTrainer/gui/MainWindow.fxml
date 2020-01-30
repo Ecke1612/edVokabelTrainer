@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" prefHeight="250.0" prefWidth="800.0" style="-fx-background-color: rgb(86, 148, 77);" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edVokabelTrainer.gui.Controller">
+<BorderPane fx:id="borderPane" prefHeight="250.0" prefWidth="820.0" style="-fx-background-color: rgb(86, 148, 77);" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edVokabelTrainer.gui.Controller">
    <center>
       <VBox spacing="15.0" BorderPane.alignment="CENTER">
          <children>
@@ -43,11 +43,11 @@
                   <Insets />
                </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER_LEFT" spacing="10.0">
+            <HBox alignment="CENTER_LEFT" spacing="5.0">
                <children>
                   <Label fx:id="label_person" text="Singular" textFill="WHITE">
                      <font>
-                        <Font size="20.0" />
+                        <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
                   <TextField fx:id="textfield" prefHeight="32.0" prefWidth="450.0" stylesheets="@css/textfield.css">
@@ -58,6 +58,11 @@
                   <Button fx:id="btn_editvok" mnemonicParsing="false" onAction="#editVok" style="-fx-background-color: transparent;" text="" textFill="WHITE">
                      <font>
                         <Font name="Segoe MDL2 Assets" size="17.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btn_deletevok" mnemonicParsing="false" onAction="#deleteVok" style="-fx-background-color: transparent;" text="" textFill="#ffffff">
+                     <font>
+                        <Font name="Segoe MDL2 Assets" size="20.0" />
                      </font>
                   </Button>
                   <Label fx:id="label_feedback" textFill="#93ff82">
@@ -109,6 +114,7 @@
                      <items>
                         <MenuItem fx:id="menuExercise" mnemonicParsing="false" onAction="#startTraining" text="Übung starten" />
                         <MenuItem fx:id="menuRepetition" mnemonicParsing="false" onAction="#startRepetition" text="Wiederhohlung starten" />
+                        <MenuItem mnemonicParsing="false" onAction="#resetDic" text="Fortschritt löschen" />
                      </items>
                 </Menu>
                   <Menu fx:id="menu_dictionaries" mnemonicParsing="false" onAction="#initMenuDictionaries" text="Wörerbücher" />

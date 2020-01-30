@@ -12,6 +12,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -116,6 +117,7 @@ public class Controller {
         //System.out.println("next Entry");
         textfield.setText("");
         textfield.setStyle("-fx-text-fill: white");
+        label_feedback.setText("");
         if(activeVokabelList.size() != 0) {
             chosenVokabel = pickVokabel();
             label_vok.setText(chosenVokabel.getGerman());
@@ -166,28 +168,7 @@ public class Controller {
             btn_toggleTraining.setDisable(true);
         }
     }
-/*
-    private EntrySet pickEntrySet1() {
-        ArrayList<EntrySet> entrySets = datahandler.getActiveDictionary().getEntrySets();
-        //System.out.println("entrySets size: " + entrySets.size() + "; pickCounter: " + pickEntryCounter);
-        int rIndex = random.nextInt(entrySets.size());
-        if(pickEntryCounter == entrySets.size() - 1) {
-            pickEntryCounter = 0;
-            return entrySets.get(rIndex);
-        } else {
-            double rDouble = random.nextDouble();
-            double propability = (double) entrySets.get(rIndex).getCorrectTranslated() / (double) learndIndex;
-            //System.out.println("rDouble = " + rDouble + "; prop: " + propability);
-            if (rDouble > propability) {
-                globalRIndex = rIndex;
-                return entrySets.get(rIndex);
-            } else {
-                pickEntrySet();
-            }
-        }
-        return null;
-    }
-*/
+
 
     public void check_vok() {
         if(stateTrainingRunning) {
@@ -301,12 +282,48 @@ public class Controller {
         addVokWindowOnline.setFieldsFromVokabel(chosenVokabel);
     }
 
+    public void deleteVok() {
+        if(confirmDialog("Vokabel löschen?", "Möchtest du diese Vokabel wirklisch löschen?")) {
+            activeVokabelList.remove(chosenVokabel);
+            datahandler.save();
+            nextEntry();
+        }
+    }
+
+    private boolean confirmDialog(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(title);
+        alert.setContentText(content);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     private void changeDictionarySelection(int locDic) {
         stopTraining();
         datahandler.getStoreSettingsObject().setActiveDic(locDic);
         //System.out.println("active Dic: " + locDic);
         info_label.setText(datahandler.getActiveDictionary().getName() + " wurde geladen");
         setTitle();
+        initMenuVokSize();
+    }
+
+    public void resetDic() {
+        if(confirmDialog("Fortschritt löschen?", "Möchtest du deinen Lernfortschritt wirklich löschen?")) {
+            for (Vokabel v : datahandler.getActiveDictionary().getVokabelList()) {
+                v.resetSuccesscount();
+            }
+            while (datahandler.getActiveDictionary().getLearndVokabelList().size() != 0) {
+                datahandler.getActiveDictionary().moveVokabelToActiveList(datahandler.getActiveDictionary().getLearndVokabelList().get(0));
+            }
+            datahandler.save();
+            initMenuVokSize();
+        }
     }
 
     public void deleteDic() {
