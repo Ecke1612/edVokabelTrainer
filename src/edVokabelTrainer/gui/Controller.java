@@ -307,7 +307,6 @@ public class Controller {
     private void changeDictionarySelection(int locDic) {
         stopTraining();
         datahandler.getStoreSettingsObject().setActiveDic(locDic);
-        //System.out.println("active Dic: " + locDic);
         info_label.setText(datahandler.getActiveDictionary().getName() + " wurde geladen");
         setTitle();
         initMenuVokSize();
